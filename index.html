@@ -6,6 +6,7 @@
     <title>MinhKhoi's Commencement</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&family=Great+Vibes&family=Courier+Prime&display=swap" rel="stylesheet">
     <style>
+        /* GIỮ NGUYÊN TOÀN BỘ CSS CỦA BẠN */
         :root {
             --palette-beige: #DCC6B3; --palette-black: #0C0C0C; --palette-white: #FFFFFF;        
             --palette-navy:  #0F1A30; --palette-pink:  #F5D5D6; --palette-grey:  #E5E5E7; --palette-peri:  #9CA7C7;        
@@ -13,6 +14,7 @@
         }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-main); margin: 0; padding: 20px; line-height: 1.6; }
         .taskbar { display: flex; align-items: center; justify-content: space-between; background-color: var(--card-bg); padding: 12px 24px; border-radius: 16px; max-width: 1200px; margin: 0 auto 40px auto; box-shadow: 0 4px 20px rgba(30, 44, 72, 0.08); flex-wrap: wrap; gap: 15px; border: 1px solid rgba(0,0,0,0.03); }
+        .brand-section { display: flex; align-items: center; gap: 15px; }
         .logo-circle { width: 45px; height: 45px; background: linear-gradient(135deg, var(--palette-beige) 0%, var(--palette-pink) 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--palette-navy); }
         .nav-links { display: flex; gap: 10px; flex-wrap: wrap; }
         .nav-item { text-decoration: none; color: var(--text-main); padding: 8px 16px; border-radius: 10px; font-size: 0.95rem; transition: 0.3s; font-weight: 500; cursor: pointer; }
@@ -34,17 +36,26 @@
         .form-group { margin-bottom: 20px; text-align: left; }
         .form-group label { display: block; font-weight: 600; margin-bottom: 5px; color: var(--palette-navy); }
         .input-field { width: 100%; padding: 12px; border: 1.5px solid #eee; border-radius: 10px; box-sizing: border-box; font-family: inherit; font-size: 0.95rem; }
-        .checkbox-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 10px; }
+        .checkbox-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 10px; margin-top: 10px; }
         .btn-submit { width: 100%; background: var(--palette-navy); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: 600; cursor: pointer; }
-        .thank-you-box { text-align: center; padding: 20px 10px; display: none; }
+        .admin-panel { max-width: 1000px; margin: 80px auto 20px auto; border-top: 2px dashed #ccc; padding-top: 20px; text-align: center; }
+        .btn-export { background-color: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; margin: 5px; }
         .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
         .photo-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); }
         .photo-card img { width: 100%; height: 200px; object-fit: cover; }
+        .thank-you-box { text-align: center; padding: 20px 10px; display: none; }
     </style>
 </head>
 <body>
+
     <nav class="taskbar">
-        <div class="brand-section"><div class="logo-circle">🎓</div><div class="title-group"><h1 style="margin:0; font-size:1.2rem;">MinhKhoi's Commencement</h1><p style="margin:0; font-size:0.85rem; color:var(--text-sub);">Hành trình 1000 ngày tại Đôn</p></div></div>
+        <div class="brand-section">
+            <div class="logo-circle">🎓</div>
+            <div class="title-group">
+                <h1 style="margin:0; font-size:1.2rem;">MinhKhoi's Commencement</h1>
+                <p style="margin:0; font-size:0.85rem; color:var(--text-sub);">Hành trình 1000 ngày tại Đôn</p>
+            </div>
+        </div>
         <div class="nav-links">
             <div class="nav-item active" onclick="showTab('tab-intro', this)">Lời tựa</div> 
             <div class="nav-item" onclick="showTab('tab-invitation', this)">Thiệp mời</div>
@@ -63,42 +74,66 @@
 
     <div class="content-section" id="tab-invitation">
         <div class="invitation-card">
-            <div class="curved-text-container"><svg viewBox="0 0 500 150" width="100%"><path id="curve" d="M 75, 120 A 200, 200 0 0,1 425, 120" fill="transparent"/><text class="curved-text"><textPath xlink:href="#curve" startOffset="50%" text-anchor="middle">The tassel was worth the hassle</textPath></text></svg></div>
-            <h1 class="script-name">Minh Khoi's</h1><div style="letter-spacing:4px; font-weight:600;">GRADUATION PHOTOSHOOT</div>
-            <div class="details-container"><div class="detail-col"><span class="gold-label">FEB</span><span class="gold-number">1</span></div><div class="detail-col center">Le Quy Don High School</div><div class="detail-col"><span class="gold-label">9:30</span><span class="gold-number">AM</span></div></div>
+            <div class="curved-text-container">
+                <svg viewBox="0 0 500 150" width="100%"><path id="curve" d="M 75, 120 A 200, 200 0 0,1 425, 120" fill="transparent"/><text class="curved-text"><textPath xlink:href="#curve" startOffset="50%" text-anchor="middle">The tassel was worth the hassle</textPath></text></svg>
+            </div>
+            <h1 class="script-name">Minh Khoi's</h1>
+            <div class="main-event-title">GRADUATION</div><div class="sub-event-title">PHOTOSHOOT</div>
+            <div class="details-container">
+                <div class="detail-col"><span class="gold-label">FEB</span><span class="gold-number">1</span></div>
+                <div class="detail-col center">Le Quy Don High School</div>
+                <div class="detail-col"><span class="gold-label">9:30</span><span class="gold-number">AM</span></div>
+            </div>
         </div>
-        <div class="form-card" id="rsvp-container">
-            <form id="rsvp-form">
-                <div class="form-group"><label>Họ và tên</label><input type="text" id="rsvp-name" class="input-field" required></div>
-                <div class="form-group"><label>Số điện thoại</label><input type="tel" id="rsvp-phone" class="input-field" required></div>
-                <div class="form-group"><label>Thời gian</label><div class="checkbox-group"><label><input type="checkbox" name="time" value="8:30AM"> 8:30AM</label><label><input type="checkbox" name="time" value="9:30AM"> 9:30AM</label></div></div>
-                <button type="submit" class="btn-submit">Xác nhận gửi</button>
-            </form>
-            <div id="rsvp-thank-you" class="thank-you-box"><h3>Cảm ơn bạn đã xác nhận!</h3></div>
+
+        <div class="form-card">
+            <div id="rsvp-form-container">
+                <form id="rsvp-form" onsubmit="submitRSVP(event)">
+                    <div class="form-group"><label>Họ và tên</label><input type="text" id="rsvp-name" class="input-field" required></div>
+                    <div class="form-group"><label>SĐT</label><input type="tel" id="rsvp-phone" class="input-field" required></div>
+                    <div class="form-group"><label>Thời gian</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item"><input type="checkbox" name="time" value="8:30AM"> 8:30AM</label>
+                            <label class="checkbox-item"><input type="checkbox" name="time" value="9:30AM"> 9:30AM</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">Xác nhận gửi</button>
+                </form>
+            </div>
+            <div id="rsvp-thank-you" class="thank-you-box"><h3>✉️ Cảm ơn bạn đã xác nhận!</h3></div>
         </div>
     </div>
 
     <div class="content-section" id="tab-gallery">
         <div class="gallery">
-            <div class="photo-card"><img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400"></div>
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400"><div class="photo-info">Lễ tốt nghiệp.jpg</div></div>
         </div>
     </div>
 
     <div class="content-section" id="tab-guestbook">
-        <div class="form-card" id="gb-container">
-            <form id="gb-form">
-                <div class="form-group"><label>Họ và tên</label><input type="text" id="gb-name" class="input-field" required></div>
-                <div class="form-group"><label>Lời nhắn</label><textarea id="gb-msg" class="input-field" rows="4" required></textarea></div>
-                <button type="submit" class="btn-submit">Gửi lời nhắn</button>
-            </form>
-            <div id="gb-thank-you" class="thank-you-box"><h3>Cảm ơn lời nhắn của bạn!</h3></div>
+        <div class="form-card">
+            <div id="guestbook-form-container">
+                <form id="gb-form" onsubmit="submitGuestbook(event)">
+                    <div class="form-group"><label>Tên</label><input type="text" id="gb-name" class="input-field" required></div>
+                    <div class="form-group"><label>Lời nhắn</label><textarea id="gb-msg" class="input-field" rows="5" required></textarea></div>
+                    <button type="submit" class="btn-submit">Gửi lời nhắn</button>
+                </form>
+            </div>
+            <div id="guestbook-thank-you" class="thank-you-box"><h3>✨ Cảm ơn bạn!</h3></div>
         </div>
+    </div>
+
+    <div class="admin-panel">
+        <p>Dành cho Ban tổ chức: Trích xuất dữ liệu khách mời</p>
+        <button class="btn-export" onclick="exportToCSV('rsvp')">Tải CSV Xác nhận (RSVP)</button>
+        <button class="btn-export" onclick="exportToCSV('guestbook')">Tải CSV Lưu bút</button>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
+        // Cấu hình Firebase của bạn
         const firebaseConfig = {
             apiKey: "AIzaSyBQFqscPavMiqQZzp3vIxzCwbpIGj-LMGM",
             authDomain: "minhkhoicommencement.firebaseapp.com",
@@ -111,44 +146,50 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
-        let rsvpData = [];
 
-        // Lấy dữ liệu về để sẵn sàng xuất CSV
+        // Đưa các hàm ra phạm vi toàn cục (window) để HTML cũ gọi được
+        window.rsvpData = [];
+        window.guestbookData = [];
+
+        // Đồng bộ dữ liệu từ Firebase về mảng để hàm Export hoạt động
         onValue(ref(db, 'rsvps'), (snapshot) => {
             const data = snapshot.val();
-            rsvpData = data ? Object.values(data) : [];
+            window.rsvpData = data ? Object.values(data) : [];
+        });
+        onValue(ref(db, 'guestbook'), (snapshot) => {
+            const data = snapshot.val();
+            window.guestbookData = data ? Object.values(data) : [];
         });
 
-        // Hàm chuyển tab và tự động tải CSV khi vào Gallery
         window.showTab = function(tabId, element) {
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             element.classList.add('active');
 
-            if (tabId === 'tab-gallery' && rsvpData.length > 0) {
-                exportToCSV();
+            // Tự động tải CSV khi vào tab gallery (theo yêu cầu trước đó của bạn)
+            if (tabId === 'tab-gallery' && window.rsvpData.length > 0) {
+                window.exportToCSV('rsvp');
             }
         };
 
-        // Gửi RSVP
-        document.getElementById('rsvp-form').addEventListener('submit', (e) => {
+        window.submitRSVP = function(e) {
             e.preventDefault();
-            const times = Array.from(document.querySelectorAll('input[name="time"]:checked')).map(cb => cb.value).join(", ");
+            const times = Array.from(document.querySelectorAll('input[name="time"]:checked')).map(cb => cb.value).join("; ");
             const entry = {
                 Name: document.getElementById('rsvp-name').value,
                 Phone: document.getElementById('rsvp-phone').value,
                 Times: times,
                 Timestamp: new Date().toLocaleString()
             };
+            // Gửi lên Firebase thay vì chỉ push vào mảng
             push(ref(db, 'rsvps'), entry).then(() => {
-                document.getElementById('rsvp-form').style.display = 'none';
+                document.getElementById('rsvp-form-container').style.display = 'none';
                 document.getElementById('rsvp-thank-you').style.display = 'block';
             });
-        });
+        };
 
-        // Gửi Guestbook
-        document.getElementById('gb-form').addEventListener('submit', (e) => {
+        window.submitGuestbook = function(e) {
             e.preventDefault();
             const entry = {
                 Name: document.getElementById('gb-name').value,
@@ -156,22 +197,26 @@
                 Timestamp: new Date().toLocaleString()
             };
             push(ref(db, 'guestbook'), entry).then(() => {
-                document.getElementById('gb-form').style.display = 'none';
-                document.getElementById('gb-thank-you').style.display = 'block';
+                document.getElementById('guestbook-form-container').style.display = 'none';
+                document.getElementById('guestbook-thank-you').style.display = 'block';
             });
-        });
+        };
 
-        function exportToCSV() {
-            let csvContent = "\uFEFFHo va Ten,So Dien Thoai,Khung Gio,Thoi Gian\n";
-            rsvpData.forEach(item => {
-                csvContent += `"${item.Name}","${item.Phone}","${item.Times}","${item.Timestamp}"\n`;
+        window.exportToCSV = function(type) {
+            let data = (type === 'rsvp') ? window.rsvpData : window.guestbookData;
+            let filename = (type === 'rsvp') ? "RSVP.csv" : "Guestbook.csv";
+            if (data.length === 0) return alert("Chưa có dữ liệu!");
+
+            let csvContent = "\uFEFF" + Object.keys(data[0]).join(",") + "\n";
+            data.forEach(item => {
+                csvContent += Object.values(item).map(v => `"${v}"`).join(",") + "\n";
             });
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
-            link.download = "Danh_sach_RSVP.csv";
+            link.download = filename;
             link.click();
-        }
+        };
     </script>
 </body>
 </html>
