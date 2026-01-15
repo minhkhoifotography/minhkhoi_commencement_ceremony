@@ -1,0 +1,40 @@
+  :root {
+    --palette-beige: #DCC6B3; --palette-navy: #0F1A30; --palette-white: #FFFFFF;
+    --gold-text: #B88E2F; --bg-main: #FAF8F5; --card-bg: #FFFFFF;
+    --text-main: #1E2C48; --text-sub: #64748b;
+}
+
+body { font-family: 'Inter', sans-serif; background: var(--bg-main); margin: 0; padding: 20px; }
+
+/* Tối ưu GPU cho các Section */
+.content-section, .photo-card, .invitation-card {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.taskbar {
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--card-bg); padding: 12px 24px; border-radius: 16px;
+    position: sticky; top: 20px; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.nav-item { padding: 8px 16px; cursor: pointer; border-radius: 10px; transition: 0.3s; }
+.nav-item.active { background: var(--palette-navy); color: white; }
+
+.content-section { display: none; max-width: 1000px; margin: 40px auto; }
+.content-section.active { display: block; animation: fadeIn 0.4s ease; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Gallery & Forms */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+.photo-card img { width: 100%; height: 160px; object-fit: cover; border-radius: 12px; }
+.input-field { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd; }
+.btn-submit { background: var(--palette-navy); color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; cursor: pointer; }
+
+/* Admin FAB */
+.admin-fab-wrapper { position: fixed; bottom: 30px; right: 30px; }
+.fab-main-btn { width: 56px; height: 56px; border-radius: 50%; background: var(--palette-navy); color: white; border: none; cursor: pointer; }
+.fab-menu { display: none; flex-direction: column; gap: 10px; margin-bottom: 10px; }
+.fab-menu.active { display: flex; }
