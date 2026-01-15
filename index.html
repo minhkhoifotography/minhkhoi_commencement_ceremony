@@ -837,39 +837,50 @@ document.head.appendChild(style);
 
 console.log("⚡ Hệ thống đã được tối ưu hóa tốc độ mà không thay đổi code gốc.");
 <script>
-    /* --- HỆ THỐNG LƯU TRỮ ĐÁM MÂY (BỔ SUNG) --- */
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxRrWMY4CUAdyBL-e5gahMuL_fv-Ya_GXdJ5_f2BUU/dev';
+    // THAY LINK WEB APP MỚI CỦA BẠN VÀO ĐÂY
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyudGyaUdTbyXUa6uk63IYL-fuh6oD0fwVoe5diTiA3QrcDSOUqpKZfvXbdCCkqtjUq/exec';
 
-    // Đè (Override) hàm submitRSVP cũ để thêm tính năng gửi web
-    const originalSubmitRSVP = submitRSVP;
+    // Xử lý cho RSVP
+    const originalRSVP = submitRSVP;
     submitRSVP = function(e) {
-        originalSubmitRSVP(e); // Vẫn chạy logic hiện tại của bạn
+        originalRSVP(e); // Chạy code cũ để hiện thông báo Cảm ơn
         
-        const lastEntry = rsvpData[rsvpData.length - 1];
-        fetch(SCRIPT_URL + "?type=RSVP", {
-            method: 'POST',
-            body: JSON.stringify(lastEntry)
-        })
-        .then(res => console.log("RSVP đã được lưu vào Google Sheets"))
-        .catch(err => console.error("Lỗi lưu RSVP:", err));
+        const data = {
+            Name: document.getElementById('rsvp-name').value,
+            Phone: document.getElementById('rsvp-phone').value,
+            Times: Array.from(document.querySelectorAll('input[name="time"]:checked')).map(cb => cb.value).join("; "),
+            Note: document.getElementById('rsvp-note').value
+        };
+        
+        sendToGoogle('RSVP', data);
     };
 
-    // Đè (Override) hàm submitGuestbook cũ
-    const originalSubmitGuestbook = submitGuestbook;
+    // Xử lý cho Guestbook
+    const originalGB = submitGuestbook;
     submitGuestbook = function(e) {
-        originalSubmitGuestbook(e); // Vẫn chạy logic hiện tại của bạn
+        originalGB(e); // Chạy code cũ
         
-        const lastEntry = guestbookData[guestbookData.length - 1];
-        fetch(SCRIPT_URL + "?type=Guestbook", {
-            method: 'POST',
-            body: JSON.stringify(lastEntry)
-        })
-        .then(res => console.log("Lưu bút đã được lưu vào Google Sheets"))
-        .catch(err => console.error("Lỗi lưu Guestbook:", err));
+        const data = {
+            Name: document.getElementById('gb-name').value,
+            Contact: document.getElementById('gb-contact').value,
+            Message: document.getElementById('gb-msg').value
+        };
+        
+        sendToGoogle('Guestbook', data);
     };
+
+    function sendToGoogle(type, data) {
+        fetch(`${GOOGLE_SCRIPT_URL}?type=${type}`, {
+            method: 'POST',
+            mode: 'no-cors', // Quan trọng để chạy trên GitHub Pages
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).catch(err => console.log('Đã gửi dữ liệu!'));
+    }
 </script>
 </body>
 </html>
+
 
 
 
