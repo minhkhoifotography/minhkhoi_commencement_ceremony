@@ -470,12 +470,13 @@
             transform: translateX(-5px);
             color: #10b981;
         }
-        /* --- STYLE CHO ACTION BUTTONS GOOGLE DRIVE --- */
+        /* --- STYLE HOÀNG GIA CHO ACTION BUTTONS --- */
 .action-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 25px;
-    padding: 20px 0;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 35px 20px;
+    padding: 30px 0;
+    justify-items: center;
 }
 
 .action-container {
@@ -483,44 +484,56 @@
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    transition: all 0.3s ease;
-    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 150px;
 }
 
-.action-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 140px;             /* Cố định độ rộng container để tên không lấn sân */
-    text-decoration: none;
-    transition: transform 0.2s;
+.action-container:hover {
+    transform: translateY(-10px);
 }
 
 .action-icon-box {
-    width: 80px;
-    height: 80px;
-    background: #ffffff;
-    border-radius: 20px;
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6); /* Hiệu ứng khối 3D nhẹ */
+    border-radius: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-    border: 1px solid rgba(0,0,0,0.03);
-    margin-bottom: 12px;
+    box-shadow: 10px 10px 20px #d9d9d9, -10px -10px 20px #ffffff;
+    border: 2px solid #dfc27d; /* Viền vàng kim nhạt */
+    margin-bottom: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hiệu ứng ánh kim khi hover */
+.action-container:hover .action-icon-box {
+    border-color: #b8860b;
+    box-shadow: 0 15px 30px rgba(184, 134, 11, 0.2);
+    background: #fff;
 }
 
 .action-icon-box img {
-    width: 45px;
-    height: 45px;
-    object-fit: contain;
+    width: 50px;
+    height: 50px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
-..action-name {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--palette-navy);
+.action-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a365d; /* Màu Navy quý tộc */
     text-align: center;
-    margin-top: 8px;
+    line-height: 1.4;
+    height: 2.8em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-transform: uppercase; /* Chữ in hoa cho sang trọng */
+    letter-spacing: 0.5px;
+}
     
     /* Xử lý tên quá dài */
     width: 140px;             /* Giới hạn độ rộng của vùng chữ */
@@ -757,22 +770,24 @@ function renderGallery(filter = "") {
     container.innerHTML = `<div class="action-grid" id="action-grid"></div>`;
     const grid = document.getElementById('action-grid');
 
-    // Lọc danh sách thư mục theo thanh tìm kiếm
     const filteredFolders = photoFolders.filter(folder => 
         folder.name.toLowerCase().includes(filter.toLowerCase())
     );
 
     if (filteredFolders.length === 0) {
-        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-sub); padding: 40px;">Không tìm thấy thư mục nào...</p>`;
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #94a3b8; padding: 40px;">Không tìm thấy thư mục...</p>`;
         return;
     }
 
     filteredFolders.forEach(folder => {
-        // Mỗi folder biến thành một Action Button
+        // Icon Premium: Hình vương miện hoặc thư mục hoàng gia
+        const premiumIcon = "https://img.icons8.com/fluency/96/royal-crown.png"; // Icon Vương miện vàng
+        // Hoặc bạn có thể dùng: https://img.icons8.com/color/96/luxury.png
+        
         const actionButtonHtml = `
             <a href="${folder.downloadUrl}" target="_blank" class="action-container">
                 <div class="action-icon-box">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Google Drive">
+                    <img src="${premiumIcon}" alt="Royal Folder">
                 </div>
                 <span class="action-name">${folder.name}</span>
             </a>
@@ -1018,6 +1033,7 @@ console.log("⚡ Hệ thống đã được tối ưu hóa tốc độ mà khôn
     })();    
 </body>
 </html>
+
 
 
 
