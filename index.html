@@ -470,6 +470,54 @@
             transform: translateX(-5px);
             color: #10b981;
         }
+        /* --- STYLE CHO ACTION BUTTONS GOOGLE DRIVE --- */
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 25px;
+    padding: 20px 0;
+}
+
+.action-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.action-container:hover {
+    transform: translateY(-8px);
+}
+
+.action-icon-box {
+    width: 80px;
+    height: 80px;
+    background: #ffffff;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.03);
+    margin-bottom: 12px;
+}
+
+.action-icon-box img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}
+
+.action-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--palette-navy);
+    text-align: center;
+    max-width: 120px;
+    line-height: 1.3;
+}
     </style>
 </head>
 <body>
@@ -674,38 +722,39 @@
         name: "MinhKhoi_GraduationPhotoshoot",
         downloadUrl: "https://drive.google.com/drive/folders/1rmopYHyyEkl6Eoy7zeeLVxyuGYYRqLhf?usp=sharing",
     },
-    //{
-        //name: "Bạn Bè Thân Thiết",
-        //downloadUrl: "https://drive.google.com/drive/folders/ID_CUA_BAN_2",
-    //}
+    {
+        name: "Anna Uwu",
+        downloadUrl: "https://drive.google.com/drive/folders/1cNagl52lth6eh-rKwIU2KeH00qb_IQf5?usp=sharing",
+    }
 ];
 
-        function renderGallery(filter = "") {
+        // --- HÀM HIỂN THỊ THEO KIỂU ACTION BUTTON (GIỮ NGUYÊN DỮ LIỆU CŨ) ---
+function renderGallery(filter = "") {
     const container = document.getElementById('gallery-container');
     container.innerHTML = `<div class="action-grid" id="action-grid"></div>`;
     const grid = document.getElementById('action-grid');
 
-    // Lọc dữ liệu dựa trên thanh tìm kiếm
+    // Lọc danh sách thư mục theo thanh tìm kiếm
     const filteredFolders = photoFolders.filter(folder => 
         folder.name.toLowerCase().includes(filter.toLowerCase())
     );
 
     if (filteredFolders.length === 0) {
-        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #94a3b8; padding: 40px;">Không tìm thấy thư mục nào phù hợp...</p>`;
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-sub); padding: 40px;">Không tìm thấy thư mục nào...</p>`;
         return;
     }
 
     filteredFolders.forEach(folder => {
-        // Tạo Action Button cho mỗi folder
-        const actionHtml = `
-            <a href="${folder.downloadUrl}" target="_blank" class="action-item">
-                <div class="action-button">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Drive">
+        // Mỗi folder biến thành một Action Button
+        const actionButtonHtml = `
+            <a href="${folder.downloadUrl}" target="_blank" class="action-container">
+                <div class="action-icon-box">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Google Drive">
                 </div>
-                <span class="action-label">${folder.name}</span>
+                <span class="action-name">${folder.name}</span>
             </a>
         `;
-        grid.innerHTML += actionHtml;
+        grid.innerHTML += actionButtonHtml;
     });
 }
 
@@ -946,6 +995,7 @@ console.log("⚡ Hệ thống đã được tối ưu hóa tốc độ mà khôn
     })();    
 </body>
 </html>
+
 
 
 
