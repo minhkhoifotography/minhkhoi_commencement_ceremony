@@ -9,52 +9,54 @@
     <style>
         .action-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 20px;
-    padding: 20px 0;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 40px 20px;
+    padding: 30px 0;
+    justify-items: center;
 }
 
-.action-item {
+.action-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    transition: transform 0.2s, filter 0.2s;
-}
-
-.action-item:hover {
-    transform: translateY(-5px);
-}
-
-.action-icon-box {
-    width: 90px;
-    height: 90px;
-    background: #ffffff;
-    border-radius: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    border: 2px solid #D4AF37; /* Màu vàng kim Royal */
-    margin-bottom: 15px;
-    font-size: 40px; /* Kích thước icon */
-    color: #D4AF37;   /* Màu của icon */
     transition: all 0.3s ease;
 }
 
-.action-container:hover .action-icon-box {
-    background: #D4AF37;
-    color: #ffffff;
-    transform: rotate(5deg);
+.action-icon-box {
+    width: 85px;
+    height: 85px;
+    background: #ffffff;
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+    border: 2px solid #D4AF37; /* Viền vàng kim */
+    margin-bottom: 12px;
+    font-size: 38px;
+    color: #D4AF37; /* Màu vương miện vàng */
 }
 
-.action-label {
-    font-size: 0.9rem;
-    color: var(--palette-navy);
-    font-weight: 500;
+.action-container:hover .action-icon-box {
+    transform: translateY(-5px);
+    background: #D4AF37;
+    color: #fff;
+}
+
+.action-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #0F1A30;
     text-align: center;
-    max-width: 130px;
-    line-height: 1.2;
+    text-transform: uppercase;
+    width: 140px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 2.8em;
 }
         .map-container {
     max-width: 500px;
@@ -771,8 +773,7 @@
         // --- HÀM HIỂN THỊ THEO KIỂU ACTION BUTTON (GIỮ NGUYÊN DỮ LIỆU CŨ) ---
 function renderGallery(filter = "") {
     const container = document.getElementById('gallery-container');
-    // Tạo lưới hiển thị chuyên nghiệp
-    container.innerHTML = `<div class="action-grid" id="action-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 40px 20px; justify-items: center; padding: 30px 0;"></div>`;
+    container.innerHTML = `<div class="action-grid" id="action-grid"></div>`;
     const grid = document.getElementById('action-grid');
 
     const filteredFolders = photoFolders.filter(folder => 
@@ -781,12 +782,11 @@ function renderGallery(filter = "") {
 
     filteredFolders.forEach(folder => {
         const actionButtonHtml = `
-            <a href="${folder.downloadUrl}" target="_blank" class="action-container" style="display: flex; flex-direction: column; align-items: center; text-decoration: none; width: 150px; transition: all 0.3s ease;">
-                <div class="action-icon-box" style="width: 90px; height: 90px; background: #fff; border-radius: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(0,0,0,0.08); border: 2px solid #D4AF37; margin-bottom: 12px; font-size: 40px; color: #D4AF37;">
-                    <i class="fa-solid fa-gem"></i> </div>
-                <span class="action-name" style="font-size: 0.85rem; font-weight: 600; color: #0F1A30; text-align: center; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.8em;">
-                    ${folder.name}
-                </span>
+            <a href="${folder.downloadUrl}" target="_blank" class="action-container">
+                <div class="action-icon-box">
+                    <i class="fa-solid fa-crown"></i>
+                </div>
+                <span class="action-name">${folder.name}</span>
             </a>
         `;
         grid.innerHTML += actionButtonHtml;
@@ -1030,6 +1030,7 @@ console.log("⚡ Hệ thống đã được tối ưu hóa tốc độ mà khôn
     })();    
 </body>
 </html>
+
 
 
 
