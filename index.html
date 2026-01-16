@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MinhKhoi's Commencement</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&family=Great+Vibes&family=Courier+Prime&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         .action-grid {
     display: grid;
@@ -25,23 +26,26 @@
     transform: translateY(-5px);
 }
 
-.action-button {
-    width: 70px;
-    height: 70px;
-    background: white;
-    border-radius: 18px;
+.action-icon-box {
+    width: 90px;
+    height: 90px;
+    background: #ffffff;
+    border-radius: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    margin-bottom: 12px;
-    border: 1px solid #f0f0f0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    border: 2px solid #D4AF37; /* Màu vàng kim Royal */
+    margin-bottom: 15px;
+    font-size: 40px; /* Kích thước icon */
+    color: #D4AF37;   /* Màu của icon */
+    transition: all 0.3s ease;
 }
 
-.action-button img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
+.action-container:hover .action-icon-box {
+    background: #D4AF37;
+    color: #ffffff;
+    transform: rotate(5deg);
 }
 
 .action-label {
@@ -774,21 +778,11 @@ function renderGallery(filter = "") {
         folder.name.toLowerCase().includes(filter.toLowerCase())
     );
 
-    if (filteredFolders.length === 0) {
-        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #94a3b8; padding: 40px;">Không tìm thấy thư mục...</p>`;
-        return;
-    }
-
     filteredFolders.forEach(folder => {
-        // Icon Premium: Hình vương miện hoặc thư mục hoàng gia
-        const premiumIcon = "https://img.icons8.com/fluency/96/royal-crown.png"; // Icon Vương miện vàng
-        // Hoặc bạn có thể dùng: https://img.icons8.com/color/96/luxury.png
-        
         const actionButtonHtml = `
             <a href="${folder.downloadUrl}" target="_blank" class="action-container">
                 <div class="action-icon-box">
-                    <img src="${premiumIcon}" alt="Royal Folder">
-                </div>
+                    <i class="fa-solid fa-crown"></i> </div>
                 <span class="action-name">${folder.name}</span>
             </a>
         `;
@@ -1033,6 +1027,7 @@ console.log("⚡ Hệ thống đã được tối ưu hóa tốc độ mà khôn
     })();    
 </body>
 </html>
+
 
 
 
