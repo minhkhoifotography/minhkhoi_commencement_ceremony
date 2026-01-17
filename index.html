@@ -407,8 +407,6 @@ label,
     </style>
 </head>
 <body>
-    <div id="youtube-audio-player"></div>
-
     <nav class="taskbar">
        <div class="brand-section" onclick="goHome()">
     <div class="logo-circle">🎓</div>
@@ -734,84 +732,74 @@ label,
             }, false);
         }
     </script>
-    <div id="youtube-audio-player" style="display:none;"></div>
+    <div id="youtube-audio-player" style="position: absolute; top: -9999px; left: -9999px;"></div>
+
+<style>
+    .music-control {
+        position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+        display: flex; align-items: center; background: rgba(255,255,255,0.9);
+        padding: 8px; border-radius: 30px; border: 1px solid #D4AF37;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    #music-toggle {
+        background: #D4AF37; border: none; width: 35px; height: 35px;
+        border-radius: 50%; color: white; cursor: pointer;
+    }
+    .vol-container { width: 0; overflow: hidden; transition: 0.3s; padding-left: 0; }
+    .music-control:hover .vol-container { width: 80px; padding-left: 10px; }
+    #vol-slider { width: 70px; accent-color: #D4AF37; cursor: pointer; }
+</style>
 
 <div class="music-control">
-    <button id="music-toggle" onclick="toggleMusic()" title="Tắt/Mở nhạc">
-        <i id="music-icon" class="fas fa-volume-up"></i>
-    </button>
-    <div class="volume-slider-container">
-        <input type="range" id="volume-slider" min="0" max="100" value="50" oninput="changeVolume(this.value)">
+    <button id="music-toggle" onclick="toggleMusic()"><i id="music-icon" class="fas fa-play"></i></button>
+    <div class="vol-container">
+        <input type="range" id="vol-slider" min="0" max="100" value="50" oninput="changeVol(this.value)">
     </div>
 </div>
-</body>
-    <script src="https://youtu.be/mJ_fkw5j-t0?si=FHGppdvhlriRc4S0"></script>
 
+<script src="https://youtu.be/mJ_fkw5j-t0?si=-v7583L4Gf43vud_"></script>
 <script>
     var player;
-    var isMuted = false;
+    var started = false;
 
-    // Hàm này tự động chạy khi YouTube API sẵn sàng
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('youtube-audio-player', {
-            height: '0',
-            width: '0',
-            videoId: 'mJ_fkw5j-t0', // ID của bài Beethoven’s 5 Secrets
-            playerVars: {
-                'autoplay': 1,
-                'loop': 1,
-                'playlist': 'mJ_fkw5j-t0',
-                'controls': 0
-            },
-            events: {
-                'onReady': onPlayerReady
-            }
+            videoId: 'mJ_fkw5j-t0',
+            playerVars: { 'autoplay': 1, 'controls': 0, 'playlist': 'mJ_fkw5j-t0', 'loop': 1 },
+            events: { 'onReady': onPlayerReady }
         });
     }
 
     function onPlayerReady(event) {
-        // Mẹo: Tắt tiếng lúc đầu để trình duyệt cho phép Autoplay
-        event.target.mute(); 
-        event.target.playVideo();
-
-        // LẮNG NGHE TƯƠNG TÁC ĐẦU TIÊN CỦA NGƯỜI DÙNG ĐỂ BẬT TIẾNG
-        const enableAudio = () => {
-            event.target.unMute();
-            event.target.setVolume(60); // Đặt âm lượng 60% cho trang trọng
-            event.target.playVideo();
-            console.log("Nhạc đã bắt đầu phát!");
-            // Hủy lắng nghe sau khi đã kích hoạt xong
-            window.removeEventListener('click', enableAudio);
-            window.removeEventListener('scroll', enableAudio);
-        };
-
-        window.addEventListener('click', enableAudio);
-        window.addEventListener('scroll', enableAudio);
-    }
-
-    // Hàm cho nút Tắt/Mở nhạc
-    function toggleMusic() {
-        if (player && player.getPlayerState() !== -1) {
-            if (isMuted) {
+        // Lắng nghe click để bắt đầu phát nhạc
+        document.addEventListener('click', function startMusic() {
+            if(!started) {
                 player.unMute();
+                player.playVideo();
+                player.setVolume(50);
                 document.getElementById('music-icon').className = 'fas fa-volume-up';
-            } else {
-                player.mute();
-                document.getElementById('music-icon').className = 'fas fa-volume-mute';
+                started = true;
+                console.log("Music Started!");
             }
-            isMuted = !isMuted;
+        }, { once: true });
+    }
+
+    function toggleMusic() {
+        var state = player.getPlayerState();
+        if (state === 1) { // Đang phát
+            player.pauseVideo();
+            document.getElementById('music-icon').className = 'fas fa-play';
+        } else {
+            player.playVideo();
+            document.getElementById('music-icon').className = 'fas fa-volume-up';
         }
     }
 
-    // Hàm cho thanh trượt âm lượng
-    function changeVolume(value) {
-        if (player && player.setVolume) {
-            player.setVolume(value);
-        }
-    }
+    function changeVol(v) { if(player) player.setVolume(v); }
 </script>
 </script>
 </html>
+
 
 
 
