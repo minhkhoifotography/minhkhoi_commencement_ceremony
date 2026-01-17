@@ -4,9 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MinhKhoi's Commencement Ceremony</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&family=Great+Vibes&family=Courier+Prime&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        /* 1. BIG TITLE - Font Cinzel (Quyền lực, La Mã) */
+.title-group h1, 
+.script-name, 
+.main-event-title {
+    font-family: 'Cinzel', serif !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+/* Điều chỉnh riêng cho tên trong thiệp để không bị quá cứng */
+.script-name {
+    font-weight: 500; 
+    letter-spacing: 5px; /* Tên người cần thoáng hơn */
+}
+
+
+/* 2. SLOGAN - Font Pinyon Script (Bay bướm, Quý tộc) */
+.title-group p,
+.curved-text, /* Chữ cong trên thiệp */
+.sub-event-title, /* Chữ PHOTOSHOOT */
+.form-group .subtitle {
+    font-family: 'Pinyon Script', cursive !important;
+    font-size: 1.4rem !important; /* Font viết tay cần to hơn chút mới dễ đọc */
+    text-transform: none !important; /* Không viết hoa toàn bộ với font này */
+    letter-spacing: 1px;
+    color: #B88E2F; /* Màu vàng kim hợp với nét viết tay */
+    margin-top: 5px;
+}
+
+/* Riêng phần chữ cong SVG cần chỉnh size nhỏ hơn chút */
+.curved-text {
+    font-size: 24px !important;
+    font-weight: normal;
+}
+
+
+/* 3. MAIN IDEA - Font Lora (Học thuật, Dễ đọc) */
+body, 
+p, 
+.intro-text,
+.nav-item,
+.action-name,
+.input-field,
+label,
+.btn-submit {
+    font-family: 'Lora', serif !important;
+}
+
+/* Tinh chỉnh đoạn văn chính cho giống sách */
+#tab-intro p {
+    line-height: 1.8;
+    font-size: 1.05rem;
+    color: #2c3e50;
+}
         :root {
             --palette-beige: #DCC6B3;        
             --palette-black: #0C0C0C;        
@@ -599,6 +654,7 @@
     </script>
 </body>
 </html>
+
 
 
 
