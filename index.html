@@ -7,6 +7,59 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=Lora:wght@500;600&family=EB+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        /* Style cho nút điều khiển nhạc */
+.music-control {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 10px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 1px solid #D4AF37;
+    transition: all 0.3s ease;
+}
+
+#music-toggle {
+    background: #D4AF37;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+#music-toggle:hover {
+    transform: scale(1.1);
+    background: #B88E2F;
+}
+
+.volume-slider-container {
+    width: 0;
+    overflow: hidden;
+    transition: width 0.3s ease;
+    padding-left: 0;
+}
+
+.music-control:hover .volume-slider-container {
+    width: 100px;
+    padding-left: 10px;
+}
+
+#volume-slider {
+    width: 80px;
+    cursor: pointer;
+    accent-color: #D4AF37;
+}
         /* TỔNG THỂ KHU VỰC TIÊU ĐỀ */
 .title-group {
     text-align: center;
@@ -680,8 +733,72 @@ label,
             }, false);
         }
     </script>
+    <div id="youtube-audio-player" style="display:none;"></div>
+
+<div class="music-control">
+    <button id="music-toggle" onclick="toggleMusic()" title="Tắt/Mở nhạc">
+        <i id="music-icon" class="fas fa-volume-up"></i>
+    </button>
+    <div class="volume-slider-container">
+        <input type="range" id="volume-slider" min="0" max="100" value="50" oninput="changeVolume(this.value)">
+    </div>
+</div>
 </body>
+    <script src="https://youtu.be/mJ_fkw5j-t0?si=8B1W6NyUYKzTrCT4"></script>
+<script>
+    var player;
+    var isMuted = false;
+
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('youtube-audio-player', {
+            height: '0',
+            width: '0',
+            videoId: 'mJ_fkw5j-t0', // ID của bài Beethoven's 5 Secrets
+            playerVars: {
+                'autoplay': 1,
+                'loop': 1,
+                'playlist': 'mJ_fkw5j-t0'
+            },
+            events: {
+                'onReady': onPlayerReady
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        event.target.setVolume(50);
+        // Do chính sách trình duyệt, nhạc có thể không tự phát nếu chưa tương tác
+        // Chúng ta sẽ phát ngay khi khách nhấn vào bất kỳ đâu trên trang
+        document.body.addEventListener('click', function() {
+            player.playVideo();
+        }, { once: true });
+    }
+
+    function toggleMusic() {
+        if (isMuted) {
+            player.unMute();
+            document.getElementById('music-icon').className = 'fas fa-volume-up';
+            isMuted = false;
+        } else {
+            player.mute();
+            document.getElementById('music-icon').className = 'fas fa-volume-mute';
+            isMuted = true;
+        }
+    }
+
+    function changeVolume(value) {
+        if (player && player.setVolume) {
+            player.setVolume(value);
+            if (value == 0) {
+                document.getElementById('music-icon').className = 'fas fa-volume-mute';
+            } else {
+                document.getElementById('music-icon').className = 'fas fa-volume-up';
+            }
+        }
+    }
+</script>
 </html>
+
 
 
 
