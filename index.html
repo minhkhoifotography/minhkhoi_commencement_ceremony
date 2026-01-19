@@ -4,160 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MinhKhoi's Commencement Ceremony</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=Lora:wght@500;600&family=EB+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=Lora:wght@500;600&family=EB+Garamond:ital,wght@1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Courier+Prime&family=Great+Vibes&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* ABOUT ME SECTION STYLES */
-        .about-card {
-            display: flex;
-            gap: 30px;
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            align-items: flex-start;
-            margin-top: 20px;
-        }
-
-        .about-image img {
-            width: 300px;
-            border-radius: 15px;
-            box-shadow: 10px 10px 0px #D4AF37; /* Đổ bóng kiểu nghệ thuật */
-        }
-
-        .about-info h2 {
-            font-family: 'Cinzel', serif;
-            color: #0F1A30;
-            margin-bottom: 20px;
-        }
-
-        .about-info p {
-            margin: 8px 0;
-            line-height: 1.6;
-        }
-
-        .experience-list {
-            margin-top: 20px;
-            padding-left: 20px;
-        }
-
-        .experience-list li {
-            margin-bottom: 10px;
-        }
-
-        /* TỐI ƯU MOBILE (RESPONSIVE) */
-        @media (max-width: 768px) {
-            .about-card {
-                flex-direction: column; /* Chuyển thành hàng dọc trên điện thoại */
-                padding: 20px;
-                align-items: center;
-            }
-
-            .about-image img {
-                width: 100%;
-                max-width: 250px;
-                margin-bottom: 20px;
-            }
-
-            .title-group h1 {
-                font-size: 2.5rem !important; /* Thu nhỏ tiêu đề chính */
-            }
-
-            .main-idea {
-                font-size: 1.5rem !important;
-            }
-
-            .bible-slogan {
-                font-size: 1.1rem !important;
-            }
-
-            .taskbar {
-                padding: 10px;
-                gap: 5px;
-            }
-
-            .nav-item span {
-                display: none; /* Ẩn chữ trên taskbar điện thoại để tránh chật */
-            }
-
-            .nav-item i {
-                font-size: 1.5rem;
-            }
-        }
-        .btn-direction:hover {
-            background-color: #D4AF37 !important; /* Đổi sang màu vàng kim khi hover */
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(212, 175, 55, 0.3);
-        }
-        /* DÒNG 1: BIG TITLE - TÊN CHÍNH (UY NGHI) */
-        .title-group h1 {
-            font-family: 'Cinzel', serif !important;
-            font-size: 5.2rem !important; /* Tăng lên để giữ vị thế dẫn đầu */
-            font-weight: 800;
-            color: #0F1A30;
-            letter-spacing: 10px; 
-            margin-bottom: 25px !important;
-            text-transform: uppercase;
-            line-height: 1.1;
-        }
-
-        /* DÒNG 2: MAIN IDEA - DÒNG CHUẨN (10/10) */
-        .main-idea {
-            font-family: 'Lora', serif !important;
-            font-size: 2.4rem !important; /* KÍCH THƯỚC CHUẨN */
-            font-weight: 600;
-            color: #B88E2F; 
-            margin: 15px 0 30px 0 !important;
-            letter-spacing: 1px;
-            display: block;
-            line-height: 1.3;
-        }
-
-        /* DÒNG 3: SLOGAN KINH THÁNH & CHÚ THÍCH - TỶ LỆ 7/10 */
-        .bible-slogan {
-            font-family: 'EB Garamond', serif !important;
-            /* 1.68rem là chính xác 70% của 2.4rem */
-            font-size: 2rem !important; 
-            font-style: italic;
-            margin: 10px 0 20px 0 !important;
-            font-weight: 800;
-            color: #475569;
-            max-width: 1000px; /* Nới rộng để dàn trang đẹp hơn */
-            margin: 0 auto !important;
-            line-height: 1.6;
-        }
-
-        /* Dòng chú thích Matthew 10:16 cũng được tăng lên tương ứng */
-        .bible-slogan small {
-            display: block;
-            margin-top: 12px;
-            font-family: 'EB Garamond', serif !important;
-            /* Giữ cỡ chữ chú thích ở mức 1.2rem để cân đối với câu Slogan */
-            font-size: 1.2rem !important; 
-            font-weight: 200;
-            font-style: italic;
-            letter-spacing: 1px;
-            color: #64748b;
-        }
-
-        /* 3. MAIN IDEA - Font Lora (Học thuật, Dễ đọc) */
-        body, 
-        p, 
-        .intro-text,
-        .nav-item,
-        .action-name,
-        .input-field,
-        label,
-        .btn-submit {
-            font-family: 'Lora', serif !important;
-        }
-
-        /* Tinh chỉnh đoạn văn chính cho giống sách */
-        #tab-intro p {
-            line-height: 1.8;
-            font-size: 1.05rem;
-            color: #2c3e50;
-        }
+        /* --- CORE VARIABLES --- */
         :root {
             --palette-beige: #DCC6B3;        
             --palette-black: #0C0C0C;        
@@ -174,6 +24,40 @@
             --text-sub:  #64748b;
         }
 
+        /* --- LANGUAGE TOGGLE LOGIC --- */
+        /* Mặc định body sẽ có class 'lang-vi'. Khi chuyển sang 'lang-en', CSS sẽ ẩn tiếng Việt */
+        body.lang-vi .lang-en { display: none !important; }
+        body.lang-en .lang-vi { display: none !important; }
+
+        /* Floating Language Button Styles */
+        .lang-toggle-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--palette-navy);
+            color: #D4AF37;
+            border: 2px solid #D4AF37;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 9999;
+            box-shadow: 0 4px 15px rgba(15, 26, 48, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        .lang-toggle-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            background: #D4AF37;
+            color: var(--palette-navy);
+        }
+
+        /* --- GLOBAL STYLES --- */
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-main);
@@ -183,141 +67,123 @@
             line-height: 1.6;
         }
 
-        /* --- VATICAN STYLE TASKBAR --- */
+        /* --- TASKBAR & HEADER --- */
         .taskbar {
             display: flex;
-            flex-direction: column; /* Xếp dọc: Logo trên, Menu dưới */
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             background-color: #ffffff;
-            /* Bỏ bo góc và shadow đậm để giống phong cách trang trọng */
             border-radius: 0; 
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-            border-bottom: 3px solid #D4AF37; /* Đường viền vàng kim đặc trưng */
+            border-bottom: 3px solid #D4AF37;
             padding: 30px 20px 15px 20px;
-            max-width: 100%; /* Tràn màn hình */
+            max-width: 100%;
             margin: 0 0 40px 0;
             position: relative;
-            top: 0;
             z-index: 1000;
         }
 
         .brand-section { 
             display: flex; 
-            flex-direction: column; /* Logo nằm trên chữ */
+            flex-direction: column; 
             align-items: center; 
             gap: 10px; 
             cursor: pointer; 
-            margin-bottom: 25px; /* Tạo khoảng cách với menu bên dưới */
+            margin-bottom: 25px; 
         }
 
-        /* Logo kiểu Vatican: Bỏ hình tròn màu mè, dùng biểu tượng lớn sang trọng */
         .logo-circle {
-            width: auto; 
-            height: auto;
-            background: transparent;
             font-size: 48px; 
-            color: #D4AF37; /* Màu vàng kim loại */
-            transform: none !important; /* Bỏ hiệu ứng xoay cũ */
+            color: #D4AF37;
         }
 
         .brand-section:hover { opacity: 0.8; }
 
-        .title-group {
-            text-align: center;
-        }
+        .title-group { text-align: center; }
 
         .title-group h1 {
-            font-family: 'Playfair Display', serif; /* Font chữ có chân sang trọng */
-            font-size: 1.8rem !important;
-            text-transform: uppercase; /* Chữ in hoa */
-            letter-spacing: 3px; /* Khoảng cách chữ rộng */
+            font-family: 'Cinzel', serif !important;
+            font-size: 2rem !important;
+            font-weight: 800;
             color: #0F1A30;
-            margin: 5px 0 0 0;
+            letter-spacing: 2px; 
+            margin: 10px 0 !important;
+            text-transform: uppercase;
+            line-height: 1.2;
         }
 
-        .title-group p {
-            font-family: 'Courier Prime', monospace;
-            font-size: 0.8rem !important;
-            color: #888;
+        .main-idea {
+            font-family: 'Lora', serif !important;
+            font-size: 1.1rem !important;
+            font-weight: 600;
+            color: #B88E2F; 
+            margin: 5px 0 !important;
+            letter-spacing: 0.5px;
+            display: block;
+        }
+
+        .bible-slogan {
+            font-family: 'EB Garamond', serif !important;
+            font-size: 1.2rem !important; 
             font-style: italic;
-            letter-spacing: 1px;
+            margin: 15px 0 10px 0 !important;
+            color: #475569;
+            max-width: 800px;
         }
 
-        /* Menu kiểu Vatican: Chữ in hoa, thanh mảnh, không có nền */
         .nav-links { 
             display: flex; 
             gap: 40px; 
             flex-wrap: wrap; 
             justify-content: center;
-            border-top: 1px solid #eee; /* Đường kẻ mờ ngăn cách */
+            border-top: 1px solid #eee; 
             padding-top: 20px;
-            width: 80%; /* Giới hạn chiều rộng đường kẻ */
+            width: 80%;
         }
 
         .nav-item {
-            text-decoration: none; 
+            cursor: pointer;
             color: #555;
             padding: 5px 0; 
-            border-radius: 0; /* Bỏ bo góc nút */
             font-size: 0.9rem;
-            font-family: 'Playfair Display', serif; /* Font đồng bộ */
+            font-family: 'Playfair Display', serif; 
             font-weight: 600; 
             text-transform: uppercase;
             letter-spacing: 1px;
             position: relative;
             transition: all 0.3s ease;
-            background-color: transparent !important; /* Luôn trong suốt */
         }
 
-        /* Hiệu ứng hover và active: Đổi màu chữ sang Vàng kim */
-        .nav-item:hover, .nav-item.active { 
-            color: #D4AF37; 
-        }
-
-        /* Thêm gạch chân nhỏ khi active giống web cổ điển */
+        .nav-item:hover, .nav-item.active { color: #D4AF37; }
         .nav-item.active::after {
-            content: '';
-            display: block;
-            width: 100%;
-            height: 2px;
-            background: #D4AF37;
-            margin-top: 4px;
-            animation: fadeIn 0.3s;
+            content: ''; display: block; width: 100%; height: 2px;
+            background: #D4AF37; margin-top: 4px; animation: fadeIn 0.3s;
         }
 
-        /* --- ĐIỀU CHỈNH MOBILE CHO STYLE NÀY --- */
-        @media screen and (max-width: 768px) {
-            .taskbar {
-                padding: 20px 10px;
-                border-bottom-width: 2px;
-            }
-            .title-group h1 { font-size: 1.4rem !important; letter-spacing: 1px; }
-            .nav-links { 
-                gap: 20px; 
-                width: 100%; 
-                border-top: none; /* Bỏ kẻ ngang trên mobile cho gọn */
-            }
-            .nav-item { font-size: 0.8rem; }
-        }
-
-        /* --- LAYOUT CHUNG --- */
+        /* --- CONTENT SECTIONS --- */
         .content-section { max-width: 1000px; margin: 0 auto; display: none; }
         .content-section.active { display: block; animation: fadeIn 0.5s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- THIỆP MỜI --- */
+        /* --- ABOUT CARD --- */
+        .about-card {
+            display: flex; gap: 30px; background: white; padding: 40px;
+            border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            align-items: flex-start; margin-top: 20px;
+        }
+        .about-image img { width: 300px; border-radius: 15px; box-shadow: 10px 10px 0px #D4AF37; }
+        .about-info h2 { font-family: 'Cinzel', serif; color: #0F1A30; margin-bottom: 20px; }
+        .about-info p { margin: 8px 0; line-height: 1.6; font-family: 'Lora', serif; }
+        .experience-list { margin-top: 20px; padding-left: 20px; font-family: 'Lora', serif; }
+        .experience-list li { margin-bottom: 10px; }
+
+        /* --- INVITATION --- */
         .invitation-card {
-            background: #F9F9F9;
-            max-width: 500px; 
-            margin: 0 auto 30px auto;
-            padding: 40px 30px; 
-            text-align: center; 
-            border-radius: 2px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-            border: 1px solid #eee;
-            position: relative;
-            color: #333;
+            background: #F9F9F9; max-width: 500px; margin: 0 auto 30px auto;
+            padding: 40px 30px; text-align: center; border-radius: 2px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee;
+            position: relative; color: #333;
         }
         .curved-text-container { width: 100%; height: 100px; margin-bottom: -20px; }
         .curved-text-path { fill: transparent; }
@@ -327,7 +193,6 @@
         .script-name { font-family: 'Great Vibes', cursive; font-size: 4rem; color: var(--gold-text); margin: 0; line-height: 1.2; font-weight: 400; }
         .main-event-title { font-family: 'Courier Prime', monospace; text-transform: uppercase; letter-spacing: 4px; font-size: 1.4rem; color: #333; margin-top: 5px; font-weight: 600; }
         .sub-event-title { font-family: 'Courier Prime', monospace; text-transform: uppercase; letter-spacing: 6px; font-size: 1.4rem; color: #333; margin-bottom: 20px; font-weight: 600; }
-
         .details-container { border-top: 1px solid #555; border-bottom: 1px solid #555; padding: 15px 0; margin: 25px 0; display: flex; align-items: center; justify-content: center; }
         .detail-col { padding: 0 15px; text-align: center; }
         .detail-col.center { border-left: 1px solid #555; border-right: 1px solid #555; flex: 1; }
@@ -340,104 +205,76 @@
         .rsvp-text { font-family: 'Courier Prime', monospace; font-size: 1.1rem; letter-spacing: 1px; color: #333; font-weight: 600; }
 
         .map-container {
-            max-width: 500px;
-            margin: 0 auto 30px auto;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid rgba(0,0,0,0.03);
+            max-width: 500px; margin: 0 auto 30px auto; border-radius: 16px;
+            overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.03);
         }
         .map-container iframe { width: 100%; height: 300px; border: none; display: block; }
 
-        /* --- FORM --- */
+        /* --- FORMS --- */
         .form-card { background: var(--card-bg); max-width: 500px; margin: 0 auto; padding: 35px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .form-group { margin-bottom: 20px; text-align: left; }
-        .form-group label { display: block; font-weight: 600; margin-bottom: 5px; color: var(--palette-navy); }
-        .input-field { width: 100%; padding: 12px; border: 1.5px solid #eee; border-radius: 10px; box-sizing: border-box; font-family: inherit; font-size: 0.95rem; transition: 0.3s; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 5px; color: var(--palette-navy); font-family: 'Lora', serif; }
+        .input-field { width: 100%; padding: 12px; border: 1.5px solid #eee; border-radius: 10px; box-sizing: border-box; font-family: 'Lora', serif; font-size: 0.95rem; transition: 0.3s; }
         .input-field:focus { border-color: var(--palette-beige); outline: none; }
-        .btn-submit { width: 100%; background: var(--palette-navy); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .btn-submit { width: 100%; background: var(--palette-navy); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Lora', serif; }
         .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(30, 44, 72, 0.2); }
         .thank-you-box { text-align: center; padding: 20px 10px; display: none; }
 
-        /* --- GALLERY ACTION BUTTONS --- */
+        /* --- GALLERY ACTION --- */
         .action-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 35px 20px;
-            padding: 30px 0;
-            justify-items: center;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 35px 20px; padding: 30px 0; justify-items: center;
         }
         .action-container {
             display: flex; flex-direction: column; align-items: center; text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            width: 150px;
+            transition: all 0.4s; width: 150px;
         }
         .action-container:hover { transform: translateY(-10px); }
         .action-icon-box {
-            width: 90px; height: 90px;
-            background: linear-gradient(145deg, #ffffff, #e6e6e6);
+            width: 90px; height: 90px; background: linear-gradient(145deg, #ffffff, #e6e6e6);
             border-radius: 24px; display: flex; align-items: center; justify-content: center;
             box-shadow: 10px 10px 20px #d9d9d9, -10px -10px 20px #ffffff;
-            border: 2px solid #dfc27d; margin-bottom: 15px; position: relative; overflow: hidden;
-            font-size: 38px; color: #D4AF37;
+            border: 2px solid #dfc27d; margin-bottom: 15px; font-size: 38px; color: #D4AF37;
         }
-        .action-container:hover .action-icon-box { border-color: #b8860b; box-shadow: 0 15px 30px rgba(184, 134, 11, 0.2); background: #fff; }
-        .action-name {
-            font-size: 0.95rem; font-weight: 600; color: #1a365d; text-align: center;
-            line-height: 1.4; height: 2.8em; display: -webkit-box; -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical; overflow: hidden; text-transform: uppercase; letter-spacing: 0.5px;
-            width: 140px; word-wrap: break-word;
-        }
+        .action-name { font-size: 0.95rem; font-weight: 600; color: #1a365d; text-align: center; text-transform: uppercase; }
 
-        /* --- MOBILE RESPONSIVE (TỐI ƯU CHO ĐIỆN THOẠI) --- */
+        /* --- MOBILE RESPONSIVE --- */
         @media screen and (max-width: 768px) {
-            .taskbar {
-                flex-direction: column;
-                gap: 15px;
-                padding: 15px;
-                top: 0;
-            }
-            .nav-links {
-                display: flex;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                width: 100%;
-                justify-content: flex-start;
-                padding-bottom: 5px;
-                -webkit-overflow-scrolling: touch;
-            }
-            .nav-item {
-                font-size: 0.85rem;
-                padding: 8px 12px;
-                white-space: nowrap;
-                flex-shrink: 0;
-            }
-            body { padding: 10px; }
-            .content-section { margin-top: 10px; }
-            .invitation-card { padding: 25px 15px; width: auto; margin: 0 0 20px 0; }
-            .script-name { font-size: 2.8rem; }
+            .taskbar { flex-direction: column; gap: 15px; padding: 15px; }
+            .nav-links { flex-wrap: nowrap; overflow-x: auto; width: 100%; justify-content: flex-start; padding-bottom: 5px; }
+            .nav-item { font-size: 0.85rem; padding: 8px 12px; white-space: nowrap; flex-shrink: 0; }
+            .about-card { flex-direction: column; padding: 20px; align-items: center; }
+            .about-image img { width: 100%; max-width: 250px; margin-bottom: 20px; }
+            .title-group h1 { font-size: 1.5rem !important; }
+            .main-idea { font-size: 0.95rem !important; }
             .details-container { flex-direction: column; gap: 20px; }
-            .detail-col.center { border-left: none; border-right: none; border-top: 1px solid #555; border-bottom: 1px solid #555; padding: 15px 0; width: 100%; }
-            .palette-row { gap: 8px; }
-            .color-dot { width: 25px; height: 25px; }
-            .map-container iframe { height: 250px; }
-            .form-card { padding: 20px; }
-            .action-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 10px; }
-            .action-container { width: 100%; }
-            .action-icon-box { width: 70px; height: 70px; font-size: 28px; }
-            .action-name { font-size: 0.8rem; -webkit-line-clamp: 3; }
+            .detail-col.center { border: none; border-top: 1px solid #555; border-bottom: 1px solid #555; padding: 15px 0; width: 100%; }
+            .lang-toggle-btn { width: 50px; height: 50px; font-size: 1rem; bottom: 20px; right: 20px; }
         }
     </style>
 </head>
-<body>
+<body class="lang-vi"> <button class="lang-toggle-btn" onclick="toggleLanguage()">
+        <span class="lang-vi">VN</span>
+        <span class="lang-en">EN</span>
+    </button>
+
     <nav class="taskbar">
        <div class="brand-section" onclick="goHome()">
             <div class="logo-circle">🎓</div>
             <div class="title-group">
-                <h1>"MINHKHOI'S COMMENCEMENT CEREMONY"</h1>
+                <h1>
+                    <span class="lang-vi">"MINHKHOI'S COMMENCEMENT CEREMONY"</span>
+                    <span class="lang-en">"MINHKHOI'S COMMENCEMENT CEREMONY"</span>
+                </h1>
                 
-                <span class="main-idea">Hành trình 1000 ngày của LuuMinhKhoi </span>
-                <span class="main-idea">Trường THPT chuyên Lê Quý Đôn - Nam Nha Trang - Khánh Hòa</span>
+                <span class="main-idea">
+                    <span class="lang-vi">Hành trình 1000 ngày của LuuMinhKhoi</span>
+                    <span class="lang-en">The 1000-day journey of LuuMinhKhoi</span>
+                </span>
+                <span class="main-idea">
+                    <span class="lang-vi">Trường THPT chuyên Lê Quý Đôn - Nam Nha Trang - Khánh Hòa</span>
+                    <span class="lang-en">Le Quy Don High School for the Gifted - Nha Trang - Khanh Hoa</span>
+                </span>
                 
                 <p class="bible-slogan">
                     "Behold, I send you forth as sheep in the midst of wolves: 
@@ -448,23 +285,48 @@
         </div>
         
         <div class="nav-links">
-            <div class="nav-item active" onclick="showTab('tab-intro', this)">Lời tựa</div>
-            <div class="nav-item" onclick="showTab('tab-about', this)">About me</div>
-            <div class="nav-item" onclick="showTab('tab-invitation', this)">Thiệp mời</div>
-            <div class="nav-item" onclick="showTab('tab-gallery', this)">Hình ảnh</div>
-            <div class="nav-item" onclick="showTab('tab-guestbook', this)">Lưu bút</div>
+            <div class="nav-item active" onclick="showTab('tab-intro', this)">
+                <span class="lang-vi">Lời tựa</span>
+                <span class="lang-en">Preface</span>
+            </div>
+            <div class="nav-item" onclick="showTab('tab-about', this)">
+                <span class="lang-vi">About me</span>
+                <span class="lang-en">About me</span>
+            </div>
+            <div class="nav-item" onclick="showTab('tab-invitation', this)">
+                <span class="lang-vi">Thiệp mời</span>
+                <span class="lang-en">Invitation</span>
+            </div>
+            <div class="nav-item" onclick="showTab('tab-gallery', this)">
+                <span class="lang-vi">Hình ảnh</span>
+                <span class="lang-en">Gallery</span>
+            </div>
+            <div class="nav-item" onclick="showTab('tab-guestbook', this)">
+                <span class="lang-vi">Lưu bút</span>
+                <span class="lang-en">Guestbook</span>
+            </div>
         </div>
     </nav>
 
     <div class="content-section active" id="tab-intro">
         <div style="background: var(--card-bg); border-left: 4px solid var(--palette-navy); padding: 35px 40px; border-radius: 0 20px 20px 0; box-shadow: 0 4px 15px rgba(30,44,72,0.05);">
-            <h2 style="color:var(--palette-navy); margin-top:0; font-family: 'Playfair Display', serif; font-style: italic;">Tri ân những mảnh ghép thanh xuân...</h2>
+            <h2 style="color:var(--palette-navy); margin-top:0; font-family: 'Playfair Display', serif; font-style: italic;">
+                <span class="lang-vi">Tri ân những mảnh ghép thanh xuân...</span>
+                <span class="lang-en">Gratitude to the pieces of my youth...</span>
+            </h2>
             <p style="font-size: 1.1rem; color: #334155; text-align: justify;">
-                "Thanh xuân của Minh Khôi không chỉ là những trang vở tại Đôn, mà còn là một bức tranh rực rỡ được dệt nên từ sự hiện diện của tất cả mọi người. <br><br>
-                Cho phép Lưu Minh Khôi muốn gửi lời <strong>biết ơn và tri ân sâu sắc nhất</strong> đến gia đình, thầy cô và những người bạn đã từng xuất hiện, từng đồng hành, hoặc dù chỉ lướt qua trong hành trình 1000 ngày vừa qua. Mỗi nụ cười, mỗi lời động viên và cả những thử thách mà chúng ta cùng đi qua đã nhào nặn nên phiên bản Minh Khôi của ngày hôm nay. <br><br>
-                Cảm ơn mọi người đã là một phần không thể thiếu trong năm tháng rực rỡ nhất của tuổi trẻ. Hy vọng chặng đường phía trước, chúng ta vẫn sẽ hằng giữ mãi những ký ức đẹp, sâu lắng này và phát triển thêm nhiều điều thú vị hơn nữa trên chuyến hành trình sắp tới. Nguyện chúc bạn nhiều điều tốt đẹp nhất và bạn sẽ gặt hái thêm nhiều thành công rực rỡ hơn nữa trên chặng hành trình của chính mình nhé^^"
+                <span class="lang-vi">
+                    "Thanh xuân của Minh Khôi không chỉ là những trang vở tại Đôn, mà còn là một bức tranh rực rỡ được dệt nên từ sự hiện diện của tất cả mọi người. <br><br>
+                    Cho phép Lưu Minh Khôi muốn gửi lời <strong>biết ơn và tri ân sâu sắc nhất</strong> đến gia đình, thầy cô và những người bạn đã từng xuất hiện, từng đồng hành, hoặc dù chỉ lướt qua trong hành trình 1000 ngày vừa qua. Mỗi nụ cười, mỗi lời động viên và cả những thử thách mà chúng ta cùng đi qua đã nhào nặn nên phiên bản Minh Khôi của ngày hôm nay. <br><br>
+                    Cảm ơn mọi người đã là một phần không thể thiếu trong năm tháng rực rỡ nhất của tuổi trẻ. Hy vọng chặng đường phía trước, chúng ta vẫn sẽ hằng giữ mãi những ký ức đẹp, sâu lắng này và phát triển thêm nhiều điều thú vị hơn nữa trên chuyến hành trình sắp tới. Nguyện chúc bạn nhiều điều tốt đẹp nhất và bạn sẽ gặt hái thêm nhiều thành công rực rỡ hơn nữa trên chặng hành trình của chính mình nhé^^"
+                </span>
+                <span class="lang-en">
+                    "Minh Khoi's youth was not just defined by pages of notebooks at Le Quy Don, but also a vibrant painting woven from everyone's presence. <br><br>
+                    Please allow Luu Minh Khoi to express the <strong>deepest gratitude and appreciation</strong> to family, teachers, and friends who have appeared, accompanied, or even just passed by during this 1000-day journey. Every smile, every word of encouragement, and even the challenges we faced together have molded the version of Minh Khoi today. <br><br>
+                    Thank you all for being an indispensable part of the most brilliant years of my youth. I hope that on the road ahead, we will always cherish these beautiful, profound memories and discover even more interesting things on the upcoming journey. Wishing you all the best, and may you achieve even more brilliant success on your own journey.^^"
+                </span>
             </p>
-            <p style="text-align: right; font-style: italic; color: var(--palette-navy); font-weight: 600;"> Sincerely & Greatfully Appreciate </p>
+            <p style="text-align: right; font-style: italic; color: var(--palette-navy); font-weight: 600;"> Sincerely & Gratefully Appreciate </p>
             <p style="text-align: right; font-style: italic; color: var(--palette-navy); font-weight: 600;"> Lưu Minh Khôi </p>
         </div>
     </div>
@@ -472,7 +334,8 @@
     <div class="content-section" id="tab-about">
         <div class="about-card">
         <div class="about-image">
-            <img src="Pio.jpg" alt="Lưu Minh Khôi"> </div>
+            <img src="Pio.jpg" alt="Lưu Minh Khôi"> 
+        </div>
         <div class="about-info">
             <h2>LƯU MINH KHÔI</h2>
             <p><strong>BOD:</strong> 16/11/2008</p>
@@ -487,7 +350,7 @@
             <p><strong>Academic Position:</strong> Professor of Vocal Music</p>
             <p><strong>Motto:</strong> <em>"Longe Dominus apparuit mihi. Et in caritate perpetua ideo attrerans." (-Jeremias 31:3-)</em></p>
             
-            <h2 style="margin-top:25px; color:#B88E2F;">Professional Experience:</h3>
+            <h2 style="margin-top:25px; color:#B88E2F;">Professional Experience:</h2>
             <ul class="experience-list">
                 <li>Professor of Vocal Music – Stella Maris Major Seminary (2017 - 2022)</li>
                 <li>Foreign affairs officer – Conferentia Episcoporum Vietnamie (2025 - now)</li>
@@ -497,8 +360,9 @@
                 <li>Vice Proffessor of Theology – Phuoc Hoa Patrish (2024 – 2025)</li>
                 <li>Head of Collabrator of Technology & Control Issues Management - MSOCE (2024)</li>
                 <li>Member of Logistics Department – We Know We Share (2023 - 2024)</li>
+            </ul>
 
-            <h2 style="margin-top:25px; color:#B88E2F;">Awards:</h3>
+            <h2 style="margin-top:25px; color:#B88E2F;">Awards:</h2>
             <ul class="experience-list">
                 <li>Second Prize of Le Quy Don Science and Engineering Fair 2024 - 2025</li>
                 <li>First Prize of Le Quy Don Science and Engineering Fair 2025 - 2026</li>
@@ -507,7 +371,7 @@
             </ul>
         </div>
     </div>
-</div>
+    </div>
 
     <div class="content-section" id="tab-invitation">
         <div class="invitation-card">
@@ -530,7 +394,10 @@
                 </svg>
             </div>
 
-            <div class="intro-text">Please join us in celebrating</div>
+            <div class="intro-text">
+                <span class="lang-vi">Trân trọng kính mời bạn đến chung vui cùng</span>
+                <span class="lang-en">Please join us in celebrating</span>
+            </div>
             <h1 class="script-name">Minh Khoi's</h1>
             <div class="main-event-title">GRADUATION</div>
             <div class="sub-event-title">PHOTOSHOOT</div>
@@ -542,8 +409,8 @@
                 </div>
                 <div class="detail-col center">
                     <div class="location-text">
-                        Le Quy Don<br>
-                        High School for the Gifted<br>
+                        <span class="lang-vi">Trường THPT Chuyên Lê Quý Đôn</span>
+                        <span class="lang-en">Le Quy Don High School for the Gifted</span><br>
                         2-3 Nguyen Tat Thanh Str<br>
                         South Nha Trang, Khanh Hoa
                     </div>
@@ -570,54 +437,90 @@
         </div>
         
         <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3899.7622007925493!2d109.17109297511006!3d12.196577388052132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31705e07aad63d29%3A0x836ec36384fbd178!2zVHLGsOG7nW5nIFRIUFQgQ2h1ecOqbiBMw6ogUXXDvSDEkMO0bg!5e0!3m2!1svi!2sus!4v1768581536168!5m2!1svi!2sus" 
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.2078631169623!2d109.20146731412763!3d12.166141335272365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3170679c6d12345d%3A0x6789abcdef123456!2sLe%20Quy%20Don%20Gifted%20High%20School!5e0!3m2!1sen!2s!4v1600000000000" 
                 width="600" height="450" style="border:0;" 
                 allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             <div style="text-align: center; margin-top: 15px;">
-    <a href="https://www.google.com/maps/dir/?api=1&destination=Trường+THPT+Chuyên+Lê+Quý+Đôn+Nha+Trang" 
-       target="_blank" 
-       style="display: inline-flex; align-items: center; gap: 10px; background-color: #0F1A30; color: #FFFFFF; padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(15, 26, 48, 0.2);">
-        <i class="fa-solid fa-location-arrow"></i>
-        CHỈ ĐƯỜNG ĐẾN ĐÂY
-    </a>
-</div>
+                <a href="https://maps.app.goo.gl/XXXX" 
+                   target="_blank" 
+                   style="display: inline-flex; align-items: center; gap: 10px; background-color: #0F1A30; color: #FFFFFF; padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(15, 26, 48, 0.2);">
+                    <i class="fa-solid fa-location-arrow"></i>
+                    <span class="lang-vi">CHỈ ĐƯỜNG ĐẾN ĐÂY</span>
+                    <span class="lang-en">GET DIRECTIONS</span>
+                </a>
+            </div>
         </div>
 
         <div class="form-card">
             <div id="rsvp-form-container">
-                <h3 style="text-align: center; margin-bottom: 25px;">Xác nhận tham gia</h3>
+                <h3 style="text-align: center; margin-bottom: 25px;">
+                    <span class="lang-vi">Xác nhận tham gia</span>
+                    <span class="lang-en">RSVP Confirmation</span>
+                </h3>
                 <form action="https://formspree.io/f/mykkzvdd" method="POST" id="rsvp-form">
                     <div class="form-group">
-                        <label>Họ và tên người tham gia</label>
-                        <input type="text" name="name" class="input-field" placeholder="Cho mình xin quý danh xinh đệp của bạn nhế ^^" required>
+                        <label>
+                            <span class="lang-vi">Họ và tên người tham gia</span>
+                            <span class="lang-en">Your Full Name</span>
+                        </label>
+                        <input type="text" name="name" class="input-field dynamic-placeholder" 
+                               data-ph-vi="Cho mình xin quý danh xinh đệp của bạn nhế ^^" 
+                               data-ph-en="May I have your beautiful name please ^^"
+                               placeholder="Cho mình xin quý danh xinh đệp của bạn nhế ^^" required>
                     </div>
                     <div class="form-group">
-                        <label>Thông tin liên lạc</label>
-                        <input type="tel" name="phone" class="input-field" placeholder="Mình có thể liên lạc với bạn qua đâu vị ^^" required>
+                        <label>
+                            <span class="lang-vi">Thông tin liên lạc</span>
+                            <span class="lang-en">Contact Info</span>
+                        </label>
+                        <input type="tel" name="phone" class="input-field dynamic-placeholder" 
+                               data-ph-vi="Mình có thể liên lạc với bạn qua đâu vị ^^" 
+                               data-ph-en="How can I contact you? ^^"
+                               placeholder="Mình có thể liên lạc với bạn qua đâu vị ^^" required>
                     </div>
                     <div class="form-group">
-                        <label>Thời gian có thể tham dự</label>
-                        <input type="text" name="time" class="input-field" placeholder="Ví dụ: 9:30AM">
+                        <label>
+                            <span class="lang-vi">Thời gian có thể tham dự</span>
+                            <span class="lang-en">Time of Attendance</span>
+                        </label>
+                        <input type="text" name="time" class="input-field dynamic-placeholder" 
+                               data-ph-vi="Ví dụ: 9:30AM" 
+                               data-ph-en="Ex: 9:30AM"
+                               placeholder="Ví dụ: 9:30AM">
                     </div>
                     <div class="form-group">
-                        <label>Ghi chú</label>
+                        <label>
+                            <span class="lang-vi">Ghi chú</span>
+                            <span class="lang-en">Notes</span>
+                        </label>
                         <textarea name="note" class="input-field" rows="3"></textarea>
                     </div>
-                    <button type="submit" class="btn-submit">Xác nhận gửi</button>
+                    <button type="submit" class="btn-submit">
+                        <span class="lang-vi">Xác nhận gửi</span>
+                        <span class="lang-en">Submit RSVP</span>
+                    </button>
                 </form>
             </div>
             <div id="rsvp-thank-you" class="thank-you-box">
                 <div style="font-size: 40px; margin-bottom: 15px;">✉️</div>
-                <h3>Cảm ơn bạn đã xác nhận tham dự!</h3>
-                <p>Hẹn gặp lại bạn với những nụ cười rạng rỡ nhất!</p>
+                <h3>
+                    <span class="lang-vi">Cảm ơn bạn đã xác nhận tham dự!</span>
+                    <span class="lang-en">Thank you for confirming!</span>
+                </h3>
+                <p>
+                    <span class="lang-vi">Hẹn gặp lại bạn với những nụ cười rạng rỡ nhất!</span>
+                    <span class="lang-en">See you there with your brightest smiles!</span>
+                </p>
             </div>
         </div>
     </div>
 
     <div class="content-section" id="tab-gallery">
         <div style="margin-bottom: 25px;">
-            <input type="text" id="gallerySearch" class="input-field" 
+            <input type="text" id="gallerySearch" class="input-field dynamic-placeholder" 
+                   data-ph-vi="🔍 Tìm kiếm thư mục hình ảnh..." 
+                   data-ph-en="🔍 Search photo folders..."
                    placeholder="🔍 Tìm kiếm thư mục hình ảnh..." 
                    onkeyup="filterGallery()">
         </div>
@@ -627,44 +530,75 @@
     <div class="content-section" id="tab-guestbook">
         <div style="text-align: center; background: var(--card-bg); max-width: 500px; margin: 0 auto 20px auto; padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
             <p style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--palette-navy); font-weight: 600;">
-                🎁 Bạn có muốn gửi quà đến LMK không ^^
+                <span class="lang-vi">🎁 Bạn có muốn gửi quà đến LMK không ^^</span>
+                <span class="lang-en">🎁 Would you like to send a gift to LMK? ^^</span>
             </p>
             
             <img src="QR_image.jpg.jpg" alt="QR Code" style="width: 220px; border-radius: 12px; margin: 15px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
             
             <p style="font-size: 0.85rem; color: var(--text-sub); margin-top: 5px;">
-                Ngân hàng: <strong>MB Bank</strong><br>
-                STK: <strong>311016112008</strong><br>
-                Tên: <strong>LUU MINH KHOI</strong>
+                <span class="lang-vi">Ngân hàng:</span><span class="lang-en">Bank:</span> <strong>MB Bank</strong><br>
+                <span class="lang-vi">STK:</span><span class="lang-en">Account No:</span> <strong>311016112008</strong><br>
+                <span class="lang-vi">Tên:</span><span class="lang-en">Name:</span> <strong>LUU MINH KHOI</strong>
             </p>
         </div>
         
         <div class="form-card">
             <div id="guestbook-form-container">
-                <h3 style="text-align: center; margin-bottom: 25px;">Gửi lời nhắn kỷ niệm</h3>
+                <h3 style="text-align: center; margin-bottom: 25px;">
+                    <span class="lang-vi">Gửi lời nhắn kỷ niệm</span>
+                    <span class="lang-en">Send a Commemorative Message</span>
+                </h3>
                 <form action="https://formspree.io/f/mykkzvdd" method="POST" id="gb-form">
                     <div class="form-group">
-                        <label>Tên của bạn</label>
-                        <input type="text" name="guest_name" class="input-field" placeholder="Cho mình xin quý danh của bạn nhế^^" required>
+                        <label>
+                            <span class="lang-vi">Tên của bạn</span>
+                            <span class="lang-en">Your Name</span>
+                        </label>
+                        <input type="text" name="guest_name" class="input-field dynamic-placeholder" 
+                               data-ph-vi="Cho mình xin quý danh của bạn nhế^^" 
+                               data-ph-en="May I have your name please^^"
+                               placeholder="Cho mình xin quý danh của bạn nhế^^" required>
                     </div>
 
                     <div class="form-group">
-                        <label>Thông tin liên lạc</label>
-                        <input type="text" name="contact" class="input-field" placeholder="Mình có thể connect với bạn qua đâu vị">
+                        <label>
+                            <span class="lang-vi">Thông tin liên lạc</span>
+                            <span class="lang-en">Contact Info</span>
+                        </label>
+                        <input type="text" name="contact" class="input-field dynamic-placeholder" 
+                               data-ph-vi="Mình có thể connect với bạn qua đâu vị" 
+                               data-ph-en="Where can I connect with you?"
+                               placeholder="Mình có thể connect với bạn qua đâu vị">
                     </div>
 
                     <div class="form-group">
-                        <label>Lời nhắn gửi đến Khôi</label>
-                        <textarea name="message" class="input-field" rows="5" placeholder="Bạn có điều gì mún nhắn gửi đến mình khôm ^^" required></textarea>
+                        <label>
+                            <span class="lang-vi">Lời nhắn gửi đến Khôi</span>
+                            <span class="lang-en">Message to Khoi</span>
+                        </label>
+                        <textarea name="message" class="input-field dynamic-placeholder" rows="5" 
+                                  data-ph-vi="Bạn có điều gì mún nhắn gửi đến mình khôm ^^" 
+                                  data-ph-en="Do you have any words for me? ^^"
+                                  placeholder="Bạn có điều gì mún nhắn gửi đến mình khôm ^^" required></textarea>
                     </div>
 
-                    <button type="submit" class="btn-submit">Gửi lời nhắn</button>
+                    <button type="submit" class="btn-submit">
+                        <span class="lang-vi">Gửi lời nhắn</span>
+                        <span class="lang-en">Send Message</span>
+                    </button>
                 </form>
             </div>
             <div id="guestbook-thank-you" class="thank-you-box">
                 <div style="font-size: 40px; margin-bottom: 15px;">✨</div>
-                <h3>Cảm ơn bạn đã nhắn gửi đến Minh Khôi!</h3>
-                <p>Những lời nhắn của bạn là món quà vô giá đối với mình. <br><br> Mến chúc bạn luôn bình an, hạnh phúc trên chặng đường phía trước!</p>
+                <h3>
+                    <span class="lang-vi">Cảm ơn bạn đã nhắn gửi đến Minh Khôi!</span>
+                    <span class="lang-en">Thank you for your message!</span>
+                </h3>
+                <p>
+                    <span class="lang-vi">Những lời nhắn của bạn là món quà vô giá đối với mình. <br><br> Mến chúc bạn luôn bình an, hạnh phúc trên chặng đường phía trước!</span>
+                    <span class="lang-en">Your words are a priceless gift to me. <br><br> Wishing you peace and happiness on your journey ahead!</span>
+                </p>
             </div>
         </div>
     </div>
@@ -682,18 +616,45 @@
             }
         ];
 
+        // --- HÀM TOGGLE NGÔN NGỮ ---
+        function toggleLanguage() {
+            const body = document.body;
+            const inputs = document.querySelectorAll('.dynamic-placeholder');
+            
+            if (body.classList.contains('lang-vi')) {
+                // Switch to English
+                body.classList.replace('lang-vi', 'lang-en');
+                inputs.forEach(input => {
+                    input.placeholder = input.getAttribute('data-ph-en');
+                });
+            } else {
+                // Switch to Vietnamese
+                body.classList.replace('lang-en', 'lang-vi');
+                inputs.forEach(input => {
+                    input.placeholder = input.getAttribute('data-ph-vi');
+                });
+            }
+            
+            // Re-render gallery to update "No folders found" text
+            filterGallery();
+        }
+
         // --- HÀM HIỂN THỊ GALLERY ---
         function renderGallery(filter = "") {
             const container = document.getElementById('gallery-container');
             container.innerHTML = `<div class="action-grid" id="action-grid"></div>`;
             const grid = document.getElementById('action-grid');
+            const isEng = document.body.classList.contains('lang-en');
 
             const filteredFolders = photoFolders.filter(folder => 
                 folder.name.toLowerCase().includes(filter.toLowerCase())
             );
 
             if (filteredFolders.length === 0) {
-                grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #94a3b8; padding: 40px;">Không tìm thấy thư mục nào phù hợp...</p>`;
+                const msg = isEng 
+                    ? "No folders found..." 
+                    : "Không tìm thấy thư mục nào phù hợp...";
+                grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #94a3b8; padding: 40px;">${msg}</p>`;
                 return;
             }
 
@@ -735,15 +696,14 @@
             const homeBtn = document.querySelector('.nav-links .nav-item:first-child');
             if(homeBtn) homeBtn.classList.add('active');
         }
+        
         // --- FORM LOGIC & LOCAL STORAGE ---
         let rsvpData = [];
         let guestbookData = [];
 
-        // Khởi chạy khi load trang
         window.addEventListener('load', () => {
             renderGallery();
             
-            // Tải dữ liệu từ LocalStorage
             const savedRSVP = localStorage.getItem('minhkhoi_rsvp_storage');
             const savedGB = localStorage.getItem('minhkhoi_gb_storage');
             
@@ -757,9 +717,7 @@
             }
         });
 
-        // Xử lý submit form và lưu LocalStorage
         document.getElementById('rsvp-form').addEventListener('submit', function(e) {
-            // Lưu ý: Formspree sẽ chuyển hướng trang, nên ta chỉ lưu data trước khi gửi
             const selectedTimes = Array.from(document.querySelectorAll('input[name="time"]:checked')).map(cb => cb.value).join("; ");
             const newData = {
                 Name: document.querySelector('input[name="name"]').value,
@@ -770,7 +728,6 @@
             rsvpData.push(newData);
             localStorage.setItem('minhkhoi_rsvp_storage', JSON.stringify(rsvpData));
             
-            // UI Update (Dù Formspree sẽ redirect, nhưng giữ code này cho UX nếu dùng AJAX)
             document.getElementById('rsvp-form-container').style.display = 'none';
             document.getElementById('rsvp-thank-you').style.display = 'block';
         });
@@ -789,13 +746,11 @@
         });
 
         // --- OPTIMIZATION ---
-        // Tối ưu hóa lazy loading cho hình ảnh
         document.querySelectorAll('img').forEach(img => {
             img.setAttribute('loading', 'lazy'); 
             img.setAttribute('decoding', 'async'); 
         });
 
-        // Tăng tốc phản hồi touch
         if ('addEventListener' in document) {
             document.addEventListener('DOMContentLoaded', function() {
                 const navItems = document.querySelectorAll('.nav-item');
@@ -805,9 +760,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
