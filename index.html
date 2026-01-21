@@ -24,18 +24,24 @@
             --text-sub:  #64748b;
         }
 
-        /* --- LANGUAGE TOGGLE LOGIC --- */
-        /* Mặc định body sẽ có class 'lang-vi'. Khi chuyển sang 'lang-en', CSS sẽ ẩn tiếng Việt */
-        body.lang-vi .lang-en { display: none !important; }
-        body.lang-en .lang-vi { display: none !important; }
+        /* --- LANGUAGE TOGGLE LOGIC (3 LANGUAGES) --- */
+        /* Logic:
+           - body.lang-vi: Hiện .lang-vi, Ẩn .lang-en, .lang-la
+           - body.lang-en: Hiện .lang-en, Ẩn .lang-vi, .lang-la
+           - body.lang-la: Hiện .lang-la, Ẩn .lang-vi, .lang-en
+        */
+        
+        body.lang-vi .lang-en, body.lang-vi .lang-la { display: none !important; }
+        body.lang-en .lang-vi, body.lang-en .lang-la { display: none !important; }
+        body.lang-la .lang-vi, body.lang-la .lang-en { display: none !important; }
 
         /* Floating Language Button Styles */
         .lang-toggle-btn {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             background: var(--palette-navy);
             color: #D4AF37;
             border: 2px solid #D4AF37;
@@ -48,7 +54,7 @@
             justify-content: center;
             font-family: 'Cinzel', serif;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
         }
         .lang-toggle-btn:hover {
@@ -134,12 +140,12 @@
 
         .nav-links { 
             display: flex; 
-            gap: 40px; 
+            gap: 30px; 
             flex-wrap: wrap; 
             justify-content: center;
             border-top: 1px solid #eee; 
             padding-top: 20px;
-            width: 80%;
+            width: 90%;
         }
 
         .nav-item {
@@ -249,13 +255,14 @@
             .main-idea { font-size: 0.95rem !important; }
             .details-container { flex-direction: column; gap: 20px; }
             .detail-col.center { border: none; border-top: 1px solid #555; border-bottom: 1px solid #555; padding: 15px 0; width: 100%; }
-            .lang-toggle-btn { width: 50px; height: 50px; font-size: 1rem; bottom: 20px; right: 20px; }
+            .lang-toggle-btn { width: 55px; height: 55px; font-size: 0.9rem; bottom: 20px; right: 20px; }
         }
     </style>
 </head>
 <body class="lang-vi"> <button class="lang-toggle-btn" onclick="toggleLanguage()">
         <span class="lang-vi">VN</span>
         <span class="lang-en">EN</span>
+        <span class="lang-la">LA</span>
     </button>
 
     <nav class="taskbar">
@@ -265,20 +272,24 @@
                 <h1>
                     <span class="lang-vi">"MINHKHOI'S COMMENCEMENT CEREMONY"</span>
                     <span class="lang-en">"MINHKHOI'S COMMENCEMENT CEREMONY"</span>
+                    <span class="lang-la">"CAERIMONIA GRADUATIONIS MINHKHOI"</span>
                 </h1>
                 
                 <span class="main-idea">
                     <span class="lang-vi">Hành trình 1000 ngày của LuuMinhKhoi</span>
                     <span class="lang-en">The 1000-day journey of LuuMinhKhoi</span>
+                    <span class="lang-la">Iter M dierum LuuMinhKhoi</span>
                 </span>
                 <span class="main-idea">
                     <span class="lang-vi">Trường THPT chuyên Lê Quý Đôn - Nam Nha Trang - Khánh Hòa</span>
                     <span class="lang-en">Le Quy Don High School for the Gifted - Nha Trang - Khanh Hoa</span>
+                    <span class="lang-la">Schola Superior Donum Le Quy - Nhatrang - Khanhhoa</span>
                 </span>
                 
                 <p class="bible-slogan">
-                    "Behold, I send you forth as sheep in the midst of wolves: 
-                    be ye therefore wise as serpents, and harmless as doves" 
+                    <span class="lang-vi">"Behold, I send you forth as sheep in the midst of wolves: be ye therefore wise as serpents, and harmless as doves"</span>
+                    <span class="lang-en">"Behold, I send you forth as sheep in the midst of wolves: be ye therefore wise as serpents, and harmless as doves"</span>
+                    <span class="lang-la">"Ecce ego mitto vos sicut oves in medio luporum; estote ergo prudentes sicut serpentes et simplices sicut columbae"</span>
                     <small>— Matthew 10:16</small>
                 </p>
             </div>
@@ -288,22 +299,27 @@
             <div class="nav-item active" onclick="showTab('tab-intro', this)">
                 <span class="lang-vi">Lời tựa</span>
                 <span class="lang-en">Preface</span>
+                <span class="lang-la">Praefatio</span>
             </div>
             <div class="nav-item" onclick="showTab('tab-about', this)">
                 <span class="lang-vi">About me</span>
                 <span class="lang-en">About me</span>
+                <span class="lang-la">De Me</span>
             </div>
             <div class="nav-item" onclick="showTab('tab-invitation', this)">
                 <span class="lang-vi">Thiệp mời</span>
                 <span class="lang-en">Invitation</span>
+                <span class="lang-la">Invitatio</span>
             </div>
             <div class="nav-item" onclick="showTab('tab-gallery', this)">
                 <span class="lang-vi">Hình ảnh</span>
                 <span class="lang-en">Gallery</span>
+                <span class="lang-la">Pinacotheca</span>
             </div>
             <div class="nav-item" onclick="showTab('tab-guestbook', this)">
                 <span class="lang-vi">Lưu bút</span>
                 <span class="lang-en">Guestbook</span>
+                <span class="lang-la">Liber Amicorum</span>
             </div>
         </div>
     </nav>
@@ -313,6 +329,7 @@
             <h2 style="color:var(--palette-navy); margin-top:0; font-family: 'Playfair Display', serif; font-style: italic;">
                 <span class="lang-vi">Tri ân những mảnh ghép thanh xuân...</span>
                 <span class="lang-en">Gratitude to the pieces of my youth...</span>
+                <span class="lang-la">Gratitudo ad fragmenta juventutis meae...</span>
             </h2>
             <p style="font-size: 1.1rem; color: #334155; text-align: justify;">
                 <span class="lang-vi">
@@ -324,6 +341,11 @@
                     "Minh Khoi's youth was not just defined by pages of notebooks at Le Quy Don, but also a vibrant painting woven from everyone's presence. <br><br>
                     Please allow Luu Minh Khoi to express the <strong>deepest gratitude and appreciation</strong> to family, teachers, and friends who have appeared, accompanied, or even just passed by during this 1000-day journey. Every smile, every word of encouragement, and even the challenges we faced together have molded the version of Minh Khoi today. <br><br>
                     Thank you all for being an indispensable part of the most brilliant years of my youth. I hope that on the road ahead, we will always cherish these beautiful, profound memories and discover even more interesting things on the upcoming journey. Wishing you all the best, and may you achieve even more brilliant success on your own journey.^^"
+                </span>
+                <span class="lang-la">
+                    "Juventus Minh Khoi non solum paginis librorum in Le Quy Don definitur, sed etiam pictura vibrante ex praesentia omnium texta est. <br><br>
+                    Sinite Luu Minh Khoi exprimere <strong>gratitudinem profundissimam</strong> familiae, magistris, et amicis qui apparuerunt, comitati sunt, vel etiam solum praeterierunt in hoc itinere mille dierum. Omnis risus, omne verbum cohortationis, et etiam provocationes quas simul affrontavimus, formam Minh Khoi hodierni finxerunt. <br><br>
+                    Gratias vobis ago quod pars indispensabilis annorum rutilantissimorum juventutis meae fuistis. Spero nos in via futura semper has memorias pulchras et profundas fovere et plura mira invenire in itinere venturo. Opto vobis omnia optima, et ut plures successus rutilantes in itinere vestro proprio metamini."
                 </span>
             </p>
             <p style="text-align: right; font-style: italic; color: var(--palette-navy); font-weight: 600;"> Sincerely & Gratefully Appreciate </p>
@@ -350,7 +372,11 @@
             <p><strong>Academic Position:</strong> Professor of Vocal Music</p>
             <p><strong>Motto:</strong> <em>"Longe Dominus apparuit mihi. Et in caritate perpetua ideo attrerans." (-Jeremias 31:3-)</em></p>
             
-            <h2 style="margin-top:25px; color:#B88E2F;">Professional Experience:</h2>
+            <h2 style="margin-top:25px; color:#B88E2F;">
+                <span class="lang-vi">Professional Experience:</span>
+                <span class="lang-en">Professional Experience:</span>
+                <span class="lang-la">Experientia Professionalis:</span>
+            </h2>
             <ul class="experience-list">
                 <li>Professor of Vocal Music – Stella Maris Major Seminary (2017 - 2022)</li>
                 <li>Foreign affairs officer – Conferentia Episcoporum Vietnamie (2025 - now)</li>
@@ -362,7 +388,11 @@
                 <li>Member of Logistics Department – We Know We Share (2023 - 2024)</li>
             </ul>
 
-            <h2 style="margin-top:25px; color:#B88E2F;">Awards:</h2>
+            <h2 style="margin-top:25px; color:#B88E2F;">
+                <span class="lang-vi">Awards:</span>
+                <span class="lang-en">Awards:</span>
+                <span class="lang-la">Praemia:</span>
+            </h2>
             <ul class="experience-list">
                 <li>Second Prize of Le Quy Don Science and Engineering Fair 2024 - 2025</li>
                 <li>First Prize of Le Quy Don Science and Engineering Fair 2025 - 2026</li>
@@ -380,7 +410,9 @@
                     <path id="curve" d="M 75, 120 A 200, 200 0 0,1 425, 120" fill="transparent"/>
                     <text class="curved-text" width="500">
                         <textPath xlink:href="#curve" startOffset="50%" text-anchor="middle">
-                            The tassel was worth the hassle
+                            <tspan class="lang-vi">The tassel was worth the hassle</tspan>
+                            <tspan class="lang-en">The tassel was worth the hassle</tspan>
+                            <tspan class="lang-la">Praemium labore dignum est</tspan>
                         </textPath>
                     </text>
                 </svg>
@@ -397,6 +429,7 @@
             <div class="intro-text">
                 <span class="lang-vi">Please join us in celebrating</span>
                 <span class="lang-en">Please join us in celebrating</span>
+                <span class="lang-la">Honorifice invitaris ad celebrandum cum</span>
             </div>
             <h1 class="script-name">Minh Khoi's</h1>
             <div class="main-event-title">GRADUATION</div>
@@ -410,7 +443,9 @@
                 <div class="detail-col center">
                     <div class="location-text">
                         <span class="lang-vi">Trường THPT Chuyên Lê Quý Đôn</span>
-                        <span class="lang-en">Le Quy Don High School for the Gifted</span><br>
+                        <span class="lang-en">Le Quy Don High School for the Gifted</span>
+                        <span class="lang-la">Schola Superior Le Quy Donum</span>
+                        <br>
                         2-3 Nguyen Tat Thanh Str<br>
                         South Nha Trang, Khanh Hoa
                     </div>
@@ -421,7 +456,11 @@
                 </div>
             </div>
 
-            <div class="dresscode-text">Dress code: semi formal</div>
+            <div class="dresscode-text">
+                <span class="lang-vi">Dress code: semi formal</span>
+                <span class="lang-en">Dress code: semi formal</span>
+                <span class="lang-la">Codex Vestiarius: semi formalis</span>
+            </div>
             
             <div class="palette-row">
                 <span class="color-dot" style="background-color: var(--palette-beige);"></span>
@@ -433,21 +472,26 @@
                 <span class="color-dot" style="background-color: var(--palette-peri);"></span>
             </div>
 
-            <div class="rsvp-text">RSVP +84 833 204 240</div>
+            <div class="rsvp-text">
+                <span class="lang-vi">RSVP +84 833 204 240</span>
+                <span class="lang-en">RSVP +84 833 204 240</span>
+                <span class="lang-la">Responsum Petitur +84 833 204 240</span>
+            </div>
         </div>
         
         <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3899.7622007925493!2d109.17109297511006!3d12.19657738805213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31705e07aad63d29%3A0x836ec36384fbd178!2zVHLGsOG7nW5nIFRIUFQgQ2h1ecOqbiBMw6ogUXXDvSDEkMO0bg!5e0!3m2!1svi!2s!4v1768840395619!5m2!1svi!2s" 
-                width="600" height="450" style="border:0;
-                " allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7799.541062685454!2d109.17051362219846!3d12.196011119198419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31705e07aad63d29%3A0x836ec36384fbd178!2zVHLGsOG7nW5nIFRIUFQgQ2h1ecOqbiBMw6ogUXXDvSDEkMO0bg!5e0!3m2!1sen!2s!4v1768965591729!5m2!1sen!2s" 
+               width="600" height="450" style="border:0;" 
+               allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+               </iframe>
             <div style="text-align: center; margin-top: 15px;">
-                <a href="https://maps.app.goo.gl/XY2KrBPnvfRVmKmm9" 
+                <a href="https://maps.app.goo.gl/3m7Ck9MEMTQcXesq9" 
                    target="_blank" 
                    style="display: inline-flex; align-items: center; gap: 10px; background-color: #0F1A30; color: #FFFFFF; padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(15, 26, 48, 0.2);">
                     <i class="fa-solid fa-location-arrow"></i>
                     <span class="lang-vi">CHỈ ĐƯỜNG ĐẾN ĐÂY</span>
                     <span class="lang-en">GET DIRECTIONS</span>
+                    <span class="lang-la">INDICATIONES VIARUM</span>
                 </a>
             </div>
         </div>
@@ -457,48 +501,57 @@
                 <h3 style="text-align: center; margin-bottom: 25px;">
                     <span class="lang-vi">Xác nhận tham gia</span>
                     <span class="lang-en">RSVP Confirmation</span>
+                    <span class="lang-la">Confirmatio Praesentiae</span>
                 </h3>
                 <form action="https://formspree.io/f/mykkzvdd" method="POST" id="rsvp-form">
                     <div class="form-group">
                         <label>
                             <span class="lang-vi">Họ và tên người tham gia</span>
                             <span class="lang-en">Your Full Name</span>
+                            <span class="lang-la">Nomen Plenum Tuum</span>
                         </label>
                         <input type="text" name="name" class="input-field dynamic-placeholder" 
                                data-ph-vi="Cho mình xin quý danh xinh đệp của bạn nhế ^^" 
                                data-ph-en="May I have your beautiful name please ^^"
+                               data-ph-la="Nomen tuum pulchrum, quaeso ^^"
                                placeholder="Cho mình xin quý danh xinh đệp của bạn nhế ^^" required>
                     </div>
                     <div class="form-group">
                         <label>
                             <span class="lang-vi">Thông tin liên lạc</span>
                             <span class="lang-en">Contact Info</span>
+                            <span class="lang-la">Notitiae Contactus</span>
                         </label>
                         <input type="tel" name="phone" class="input-field dynamic-placeholder" 
                                data-ph-vi="Mình có thể liên lạc với bạn qua đâu vị ^^" 
                                data-ph-en="How can I contact you? ^^"
+                               data-ph-la="Quomodo tecum communicare possum? ^^"
                                placeholder="Mình có thể liên lạc với bạn qua đâu vị ^^" required>
                     </div>
                     <div class="form-group">
                         <label>
                             <span class="lang-vi">Thời gian có thể tham dự</span>
                             <span class="lang-en">Time of Attendance</span>
+                            <span class="lang-la">Tempus Praesentiae</span>
                         </label>
                         <input type="text" name="time" class="input-field dynamic-placeholder" 
                                data-ph-vi="Ví dụ: 9:30AM" 
                                data-ph-en="Ex: 9:30AM"
+                               data-ph-la="Exempli gratia: 9:30AM"
                                placeholder="Ví dụ: 9:30AM">
                     </div>
                     <div class="form-group">
                         <label>
                             <span class="lang-vi">Ghi chú</span>
                             <span class="lang-en">Notes</span>
+                            <span class="lang-la">Notae</span>
                         </label>
                         <textarea name="note" class="input-field" rows="3"></textarea>
                     </div>
                     <button type="submit" class="btn-submit">
                         <span class="lang-vi">Xác nhận gửi</span>
                         <span class="lang-en">Submit RSVP</span>
+                        <span class="lang-la">Mitte Confirmationem</span>
                     </button>
                 </form>
             </div>
@@ -507,10 +560,12 @@
                 <h3>
                     <span class="lang-vi">Cảm ơn bạn đã xác nhận tham dự!</span>
                     <span class="lang-en">Thank you for confirming!</span>
+                    <span class="lang-la">Gratias tibi ago pro confirmatione!</span>
                 </h3>
                 <p>
                     <span class="lang-vi">Hẹn gặp lại bạn với những nụ cười rạng rỡ nhất!</span>
                     <span class="lang-en">See you there with your brightest smiles!</span>
+                    <span class="lang-la">Videbo te illic cum risu tuo splendidissimo!</span>
                 </p>
             </div>
         </div>
@@ -521,6 +576,7 @@
             <input type="text" id="gallerySearch" class="input-field dynamic-placeholder" 
                    data-ph-vi="🔍 Tìm kiếm thư mục hình ảnh..." 
                    data-ph-en="🔍 Search photo folders..."
+                   data-ph-la="🔍 Quaerere folder imaginum..."
                    placeholder="🔍 Tìm kiếm thư mục hình ảnh..." 
                    onkeyup="filterGallery()">
         </div>
@@ -532,14 +588,15 @@
             <p style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--palette-navy); font-weight: 600;">
                 <span class="lang-vi">🎁 Bạn có muốn gửi quà đến LMK không ^^</span>
                 <span class="lang-en">🎁 Would you like to send a gift to LMK? ^^</span>
+                <span class="lang-la">🎁 Visne donum mittere ad LMK? ^^</span>
             </p>
             
             <img src="qr_image.jpg" alt="QR Code" style="width: 220px; border-radius: 12px; margin: 15px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
             
             <p style="font-size: 0.85rem; color: var(--text-sub); margin-top: 5px;">
-                <span class="lang-vi">Ngân hàng:</span><span class="lang-en">Bank:</span> <strong>Vietcombank</strong><br>
-                <span class="lang-vi">STK:</span><span class="lang-en">Account No:</span> <strong>1043092852</strong><br>
-                <span class="lang-vi">Tên:</span><span class="lang-en">Name:</span> <strong>LUU MINH KHOI</strong>
+                <span class="lang-vi">Ngân hàng:</span><span class="lang-en">Bank:</span><span class="lang-la">Argentaria:</span> <strong>MB Bank</strong><br>
+                <span class="lang-vi">STK:</span><span class="lang-en">Account No:</span><span class="lang-la">Numerus Rationis:</span> <strong>311016112008</strong><br>
+                <span class="lang-vi">Tên:</span><span class="lang-en">Name:</span><span class="lang-la">Nomen:</span> <strong>LUU MINH KHOI</strong>
             </p>
         </div>
         
@@ -548,16 +605,19 @@
                 <h3 style="text-align: center; margin-bottom: 25px;">
                     <span class="lang-vi">Gửi lời nhắn kỷ niệm</span>
                     <span class="lang-en">Send a Commemorative Message</span>
+                    <span class="lang-la">Mitte Nuntium Commemorativum</span>
                 </h3>
                 <form action="https://formspree.io/f/mykkzvdd" method="POST" id="gb-form">
                     <div class="form-group">
                         <label>
                             <span class="lang-vi">Tên của bạn</span>
                             <span class="lang-en">Your Name</span>
+                            <span class="lang-la">Nomen Tuum</span>
                         </label>
                         <input type="text" name="guest_name" class="input-field dynamic-placeholder" 
                                data-ph-vi="Cho mình xin quý danh của bạn nhế^^" 
                                data-ph-en="May I have your name please^^"
+                               data-ph-la="Nomen tuum, quaeso^^"
                                placeholder="Cho mình xin quý danh của bạn nhế^^" required>
                     </div>
 
@@ -565,10 +625,12 @@
                         <label>
                             <span class="lang-vi">Thông tin liên lạc</span>
                             <span class="lang-en">Contact Info</span>
+                            <span class="lang-la">Notitiae Contactus</span>
                         </label>
                         <input type="text" name="contact" class="input-field dynamic-placeholder" 
                                data-ph-vi="Mình có thể connect với bạn qua đâu vị" 
                                data-ph-en="Where can I connect with you?"
+                               data-ph-la="Ubi tecum connectere possum?"
                                placeholder="Mình có thể connect với bạn qua đâu vị">
                     </div>
 
@@ -576,16 +638,19 @@
                         <label>
                             <span class="lang-vi">Lời nhắn gửi đến Khôi</span>
                             <span class="lang-en">Message to Khoi</span>
+                            <span class="lang-la">Nuntius ad Khoi</span>
                         </label>
                         <textarea name="message" class="input-field dynamic-placeholder" rows="5" 
                                   data-ph-vi="Bạn có điều gì mún nhắn gửi đến mình khôm ^^" 
                                   data-ph-en="Do you have any words for me? ^^"
+                                  data-ph-la="Habesne verba pro me? ^^"
                                   placeholder="Bạn có điều gì mún nhắn gửi đến mình khôm ^^" required></textarea>
                     </div>
 
                     <button type="submit" class="btn-submit">
                         <span class="lang-vi">Gửi lời nhắn</span>
                         <span class="lang-en">Send Message</span>
+                        <span class="lang-la">Mitte Nuntium</span>
                     </button>
                 </form>
             </div>
@@ -594,10 +659,12 @@
                 <h3>
                     <span class="lang-vi">Cảm ơn bạn đã nhắn gửi đến Minh Khôi!</span>
                     <span class="lang-en">Thank you for your message!</span>
+                    <span class="lang-la">Gratias tibi ago pro nuntio tuo!</span>
                 </h3>
                 <p>
                     <span class="lang-vi">Những lời nhắn của bạn là món quà vô giá đối với mình. <br><br> Mến chúc bạn luôn bình an, hạnh phúc trên chặng đường phía trước!</span>
                     <span class="lang-en">Your words are a priceless gift to me. <br><br> Wishing you peace and happiness on your journey ahead!</span>
+                    <span class="lang-la">Verba tua donum inaestimabile mihi sunt. <br><br> Opto tibi pacem et felicitatem in itinere futuro!</span>
                 </p>
             </div>
         </div>
@@ -616,24 +683,36 @@
             }
         ];
 
-        // --- HÀM TOGGLE NGÔN NGỮ ---
+        // --- HÀM TOGGLE NGÔN NGỮ (3 Languages) ---
+        const langOrder = ['lang-vi', 'lang-en', 'lang-la'];
+        
         function toggleLanguage() {
             const body = document.body;
             const inputs = document.querySelectorAll('.dynamic-placeholder');
             
-            if (body.classList.contains('lang-vi')) {
-                // Switch to English
-                body.classList.replace('lang-vi', 'lang-en');
-                inputs.forEach(input => {
-                    input.placeholder = input.getAttribute('data-ph-en');
-                });
-            } else {
-                // Switch to Vietnamese
-                body.classList.replace('lang-en', 'lang-vi');
-                inputs.forEach(input => {
-                    input.placeholder = input.getAttribute('data-ph-vi');
-                });
-            }
+            // Tìm ngôn ngữ hiện tại
+            let currentLang = 'lang-vi';
+            if (body.classList.contains('lang-en')) currentLang = 'lang-en';
+            if (body.classList.contains('lang-la')) currentLang = 'lang-la';
+            
+            // Xác định ngôn ngữ tiếp theo
+            const currentIndex = langOrder.indexOf(currentLang);
+            const nextIndex = (currentIndex + 1) % langOrder.length;
+            const nextLang = langOrder[nextIndex];
+            
+            // Thay class body
+            body.classList.remove(currentLang);
+            body.classList.add(nextLang);
+            
+            // Cập nhật placeholders
+            inputs.forEach(input => {
+                // Lấy data attribute tương ứng (data-ph-vi, data-ph-en, data-ph-la)
+                const suffix = nextLang.split('-')[1]; // vi, en, la
+                const newPlaceholder = input.getAttribute(`data-ph-${suffix}`);
+                if (newPlaceholder) {
+                    input.placeholder = newPlaceholder;
+                }
+            });
             
             // Re-render gallery to update "No folders found" text
             filterGallery();
@@ -644,16 +723,20 @@
             const container = document.getElementById('gallery-container');
             container.innerHTML = `<div class="action-grid" id="action-grid"></div>`;
             const grid = document.getElementById('action-grid');
-            const isEng = document.body.classList.contains('lang-en');
+            
+            const isVi = document.body.classList.contains('lang-vi');
+            const isEn = document.body.classList.contains('lang-en');
+            const isLa = document.body.classList.contains('lang-la');
 
             const filteredFolders = photoFolders.filter(folder => 
                 folder.name.toLowerCase().includes(filter.toLowerCase())
             );
 
             if (filteredFolders.length === 0) {
-                const msg = isEng 
-                    ? "No folders found..." 
-                    : "Không tìm thấy thư mục nào phù hợp...";
+                let msg = "Không tìm thấy thư mục nào phù hợp...";
+                if (isEn) msg = "No folders found...";
+                if (isLa) msg = "Nulla folder inveni...";
+                
                 grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #94a3b8; padding: 40px;">${msg}</p>`;
                 return;
             }
@@ -760,6 +843,3 @@
     </script>
 </body>
 </html>
-
-
-
