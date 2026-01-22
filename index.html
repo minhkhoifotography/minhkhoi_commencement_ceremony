@@ -33,7 +33,7 @@
         body.lang-en .lang-vi, body.lang-en .lang-la { display: none !important; }
         body.lang-la .lang-vi, body.lang-la .lang-en { display: none !important; }
 
-        /* Floating Language Button Styles (Bottom Right) */
+        /* Floating Language Button Styles */
         .lang-toggle-btn {
             position: fixed; bottom: 30px; right: 30px;
             width: 65px; height: 65px;
@@ -47,7 +47,7 @@
         }
         .lang-toggle-btn:hover { transform: scale(1.1) rotate(10deg); background: #D4AF37; color: var(--palette-navy); }
 
-        /* [EMOTION PACKAGE] MUSIC BUTTON (Bottom Left) */
+        /* MUSIC BUTTON STYLES */
         .music-btn {
             position: fixed; bottom: 30px; left: 30px;
             width: 60px; height: 60px;
@@ -67,7 +67,7 @@
             background-color: var(--bg-main);
             color: var(--text-main);
             margin: 0; padding: 20px; line-height: 1.6;
-            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+            overflow-x: hidden;
         }
 
         /* --- TASKBAR & HEADER --- */
@@ -124,7 +124,7 @@
 
         /* --- CONTENT SECTIONS --- */
         .content-section { max-width: 1000px; margin: 0 auto; display: none; }
-        .content-section.active { display: block; } /* Animation handled by AOS now */
+        .content-section.active { display: block; }
         
         /* --- ABOUT CARD --- */
         .about-card {
@@ -199,9 +199,7 @@
         .action-name { font-size: 0.95rem; font-weight: 600; color: #1a365d; text-align: center; text-transform: uppercase; }
 
         /* --- EVENT UPGRADE: COUNTDOWN & CALENDAR --- */
-        .countdown-container {
-            display: flex; justify-content: center; gap: 20px; margin: 30px 0; flex-wrap: wrap;
-        }
+        .countdown-container { display: flex; justify-content: center; gap: 20px; margin: 30px 0; flex-wrap: wrap; }
         .countdown-item {
             display: flex; flex-direction: column; align-items: center;
             background: var(--palette-navy); color: #D4AF37;
@@ -266,8 +264,8 @@
         <span class="lang-la">LA</span>
     </button>
 
-    <audio id="bg-music" loop>
-        <source src="https://www.bensound.com/bensound-music/bensound-memories.mp3" type="audio/mpeg">
+    <audio id="bg-music" loop autoplay>
+        <source src="Beethovens5Secrets.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
     <div class="music-btn" onclick="toggleMusic()">
@@ -283,7 +281,6 @@
                     <span class="lang-en">"MINHKHOI'S COMMENCEMENT CEREMONY"</span>
                     <span class="lang-la">"CAERIMONIA GRADUATIONIS MINHKHOI"</span>
                 </h1>
-                
                 <span class="main-idea">
                     <span class="lang-vi">Hành trình 1000 ngày của LuuMinhKhoi</span>
                     <span class="lang-en">The 1000-day journey of LuuMinhKhoi</span>
@@ -294,7 +291,6 @@
                     <span class="lang-en">Le Quy Don High School for the Gifted - Nha Trang - Khanh Hoa</span>
                     <span class="lang-la">Schola Superior Le Quy Donum - Nhatrang - Khanhhoa</span>
                 </span>
-                
                 <p class="bible-slogan">
                     <span class="lang-vi">"Behold, I send you forth as sheep in the midst of wolves: be ye therefore wise as serpents, and harmless as doves"</span>
                     <span class="lang-en">"Behold, I send you forth as sheep in the midst of wolves: be ye therefore wise as serpents, and harmless as doves"</span>
@@ -370,10 +366,8 @@
                     minhkhoifoto.27
                 </p>
             </div>
-            
             <div class="about-info">
                 <h2>LƯU MINH KHÔI</h2>
-                
                 <div class="info-grid">
                     <div class="info-item">
                         <p><strong>BOD:</strong> 16/11/2008</p>
@@ -386,13 +380,11 @@
                         <p><strong>Position:</strong> Prof. of Vocal Music</p>
                     </div>
                 </div>
-
                 <p><strong>Socials:</strong> 
                     <a href="https://www.facebook.com/minhkhoifoto.27" style="margin-right:10px"><i class="fa-brands fa-facebook"></i></a>
                     <a href="https://www.instagram.com/minhkhoifoto.27/" style="margin-right:10px"><i class="fa-brands fa-instagram"></i></a>
                     <a href="https://locket.cam/minhkhoifoto"><i class="fa-solid fa-heart"></i></a>
                 </p>
-
                 <p><strong>Hobbies:</strong></p>
                 <div class="hobby-container">
                     <span class="hobby-tag">📷 Photography</span>
@@ -402,7 +394,6 @@
                     <span class="hobby-tag">🎼 Vocal Music</span>
                     <span class="hobby-tag">✝️ Theology</span>
                 </div>
-
                 <p style="margin-top: 20px;"><strong>Motto:</strong> <em>"Longe Dominus apparuit mihi. Et in caritate perpetua ideo attrerans." (-Jeremias 31:3-)</em></p>
                 
                 <h2 style="margin-top:35px; color:#B88E2F; border-bottom: 1px solid #eee; padding-bottom: 10px;">
@@ -806,6 +797,30 @@
         const bgMusic = document.getElementById("bg-music");
         const musicIcon = document.getElementById("music-icon");
         const musicBtn = document.querySelector(".music-btn");
+
+        // Logic tự động phát thông minh
+        window.addEventListener('load', function() {
+            var playPromise = bgMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    // Autoplay started!
+                    musicBtn.classList.add("playing");
+                    musicIcon.classList.remove("fa-music");
+                    musicIcon.classList.add("fa-pause");
+                }).catch(error => {
+                    // Autoplay was prevented -> Wait for first interaction
+                    console.log("Autoplay prevented, waiting for user interaction...");
+                    document.body.addEventListener('click', function() {
+                        if(bgMusic.paused) {
+                            bgMusic.play();
+                            musicBtn.classList.add("playing");
+                            musicIcon.classList.remove("fa-music");
+                            musicIcon.classList.add("fa-pause");
+                        }
+                    }, { once: true });
+                });
+            }
+        });
 
         function toggleMusic() {
             if (bgMusic.paused) {
