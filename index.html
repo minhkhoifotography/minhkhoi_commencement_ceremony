@@ -10,8 +10,10 @@
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <style>
-        /* --- CORE VARIABLES (LIGHT MODE DEFAULT) --- */
+        /* --- CORE VARIABLES --- */
         :root {
             --palette-beige: #d8c4b6;        
             --palette-black: #0d0d0d;        
@@ -32,17 +34,17 @@
 
         /* --- DARK MODE VARIABLES --- */
         body.dark-mode {
-            --bg-main: #0F172A;       /* Nền tối đậm */
-            --card-bg: #1E293B;       /* Card tối nhẹ hơn */
-            --text-main: #E2E8F0;     /* Chữ trắng xám */
-            --text-sub:  #CBD5E1;     /* Chữ phụ sáng hơn */
-            --palette-navy: #D4AF37;  /* Đảo màu Navy thành Vàng để nổi bật trên nền tối */
-            --gold-text: #FCD34D;     /* Vàng sáng hơn */
+            --bg-main: #0F172A;       
+            --card-bg: #1E293B;       
+            --text-main: #E2E8F0;     
+            --text-sub:  #CBD5E1;     
+            --palette-navy: #D4AF37;  
+            --gold-text: #FCD34D;     
             --border-color: #334155;
             --shadow-color: rgba(0,0,0,0.3);
         }
 
-        /* Dark Mode Adjustments for Specific Elements */
+        /* Dark Mode Adjustments */
         body.dark-mode .taskbar { border-bottom: 3px solid var(--gold-text); }
         body.dark-mode .nav-item { color: #94A3B8; }
         body.dark-mode .nav-item:hover, body.dark-mode .nav-item.active { color: var(--gold-text); }
@@ -50,8 +52,8 @@
         body.dark-mode .title-group h1 { color: #F8FAFC !important; }
         body.dark-mode .bible-slogan { color: #94A3B8; }
         body.dark-mode .invitation-card { background: var(--card-bg); border-color: var(--border-color); color: var(--text-main); }
-        body.dark-mode .curved-text { fill: #F8FAFC; } /* Chữ cong màu trắng */
-        body.dark-mode .grad-cap path { stroke: #F8FAFC; } /* Mũ tốt nghiệp màu trắng */
+        body.dark-mode .curved-text { fill: #F8FAFC; } 
+        body.dark-mode .grad-cap path { stroke: #F8FAFC; } 
         body.dark-mode .intro-text, body.dark-mode .main-event-title, body.dark-mode .sub-event-title, body.dark-mode .location-text, body.dark-mode .dresscode-text, body.dark-mode .rsvp-text { color: var(--text-main); }
         body.dark-mode .details-container { border-color: var(--border-color); }
         body.dark-mode .detail-col.center { border-color: var(--border-color); }
@@ -60,30 +62,52 @@
         body.dark-mode .action-icon-box { background: #0F172A; border-color: var(--gold-text); box-shadow: none; }
         body.dark-mode .action-name { color: var(--gold-text); }
         body.dark-mode .timeline { border-left-color: var(--border-color); }
+        body.dark-mode .timeline-dot { border-color: var(--card-bg); }
+        body.dark-mode .timeline-place { color: var(--text-sub); }
         body.dark-mode .hobby-tag { background: #334155; color: white; border-color: #475569; }
         body.dark-mode .about-info h2 { color: var(--gold-text); }
         body.dark-mode .music-btn { background: var(--card-bg); border-color: var(--gold-text); }
         body.dark-mode .music-icon { color: var(--gold-text); }
         body.dark-mode .lang-toggle-btn { background: var(--card-bg); color: var(--gold-text); border-color: var(--gold-text); }
+        body.dark-mode .theme-toggle-btn { background: var(--card-bg); color: var(--gold-text); border-color: var(--gold-text); }
+        body.dark-mode .featured-title { color: var(--gold-text); }
 
-        /* --- [NEW] WELCOME SCREEN OVERLAY --- */
+        /* --- [NEW] STAGE CURTAIN WELCOME SCREEN --- */
         #welcome-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--bg-main);
             z-index: 99999; 
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            transition: opacity 0.8s ease-out, visibility 0.8s;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; /* Important for curtains */
+            pointer-events: all;
         }
         
-        #welcome-overlay.hidden {
-            opacity: 0; visibility: hidden; pointer-events: none;
+        /* Hai cánh màn nhung */
+        .curtain-panel {
+            position: absolute; top: 0; height: 100%; width: 51%; /* Overlap slightly */
+            background-color: var(--bg-main); /* Màu nền trùng với web */
+            z-index: 1; 
+            transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        .curtain-left { left: 0; transform-origin: left; border-right: 2px solid var(--gold-text); }
+        .curtain-right { right: 0; transform-origin: right; border-left: 2px solid var(--gold-text); }
+
+        /* Nội dung chào nằm trên màn nhung */
+        .welcome-content { 
+            position: relative; z-index: 10; 
+            text-align: center; padding: 20px; 
+            transition: opacity 0.5s ease;
         }
 
-        .welcome-content { text-align: center; padding: 20px; animation: fadeIn 1.5s ease; }
+        /* Khi mở màn (Class added via JS) */
+        #welcome-overlay.open .curtain-left { transform: translateX(-100%); }
+        #welcome-overlay.open .curtain-right { transform: translateX(100%); }
+        #welcome-overlay.open .welcome-content { opacity: 0; pointer-events: none; }
+        #welcome-overlay.open { pointer-events: none; }
+
+        /* Các thành phần Welcome cũ */
         .welcome-logo { font-size: 80px; margin-bottom: 20px; display: block; animation: float 3s ease-in-out infinite; }
         .welcome-title { 
-            font-family: 'Cinzel', serif; font-size: 2rem; color: var(--text-main); /* Fix color for dark mode compatibility */
+            font-family: 'Cinzel', serif; font-size: 2rem; color: var(--text-main);
             margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase;
         }
         .welcome-subtitle {
@@ -103,10 +127,43 @@
         
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-        /* --- LANGUAGE TOGGLE LOGIC --- */
-        body.lang-vi .lang-en, body.lang-vi .lang-la { display: none !important; }
-        body.lang-en .lang-vi, body.lang-en .lang-la { display: none !important; }
-        body.lang-la .lang-vi, body.lang-la .lang-en { display: none !important; }
+        /* --- LIGHTBOX STYLES --- */
+        #lightbox {
+            position: fixed; z-index: 100000; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: all 0.3s ease;
+            cursor: zoom-out;
+            backdrop-filter: blur(5px);
+        }
+        #lightbox.active { opacity: 1; visibility: visible; }
+        #lightbox img {
+            max-width: 90%; max-height: 90%;
+            border: 2px solid var(--gold-text);
+            border-radius: 4px;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+            transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.2, 0, 0.2, 1);
+        }
+        #lightbox.active img { transform: scale(1); }
+        .lightbox-close {
+            position: absolute; top: 20px; right: 30px;
+            color: #fff; font-size: 40px; cursor: pointer;
+            transition: color 0.3s;
+            z-index: 100001;
+        }
+        .lightbox-close:hover { color: var(--gold-text); }
+        .featured-item img { cursor: zoom-in; }
+
+        /* --- GLOBAL STYLES --- */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            margin: 0; padding: 20px; line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.5s, color 0.5s;
+        }
 
         /* Floating Buttons Container */
         .floating-actions {
@@ -115,8 +172,7 @@
             z-index: 9990;
         }
 
-        /* Language Button */
-        .lang-toggle-btn {
+        .lang-toggle-btn, .theme-toggle-btn {
             width: 55px; height: 55px;
             background: var(--palette-navy); color: #D4AF37;
             border: 2px solid #D4AF37; border-radius: 50%;
@@ -125,23 +181,10 @@
             font-family: 'Cinzel', serif; font-weight: bold; font-size: 0.9rem;
             transition: all 0.3s ease;
         }
-        .lang-toggle-btn:hover { transform: scale(1.1); }
+        .lang-toggle-btn:hover, .theme-toggle-btn:hover { transform: scale(1.1); }
+        .theme-toggle-btn { font-size: 1.2rem; }
 
-        /* [NEW] Dark Mode Toggle Button */
-        .theme-toggle-btn {
-            width: 55px; height: 55px;
-            background: var(--palette-navy); color: #D4AF37;
-            border: 2px solid #D4AF37; border-radius: 50%;
-            cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; transition: all 0.3s ease;
-        }
-        .theme-toggle-btn:hover { transform: scale(1.1) rotate(15deg); }
-        /* Style adjustments for dark mode button appearance in dark mode */
-        body.dark-mode .theme-toggle-btn { background: var(--card-bg); color: var(--gold-text); border-color: var(--gold-text); }
-
-
-        /* MUSIC BUTTON STYLES */
+        /* Music Button */
         .music-btn {
             position: fixed; bottom: 30px; left: 30px;
             width: 55px; height: 55px;
@@ -155,20 +198,10 @@
         .music-btn.playing { animation: spin 4s linear infinite; border-color: var(--palette-navy); }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* --- GLOBAL STYLES --- */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            margin: 0; padding: 20px; line-height: 1.6;
-            overflow-x: hidden;
-            transition: background-color 0.5s, color 0.5s; /* Smooth theme transition */
-        }
-
         /* --- TASKBAR & HEADER --- */
         .taskbar {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            background-color: var(--card-bg); /* Use variable */
+            background-color: var(--card-bg);
             box-shadow: 0 4px 6px -1px var(--shadow-color);
             border-bottom: 3px solid #D4AF37;
             padding: 30px 20px 15px 20px;
@@ -184,7 +217,7 @@
 
         .title-group h1 {
             font-family: 'Cinzel', serif !important; font-size: 2rem !important;
-            font-weight: 800; color: var(--palette-black); /* Changed to var */
+            font-weight: 800; color: var(--palette-black);
             letter-spacing: 2px; margin: 10px 0 !important; text-transform: uppercase; line-height: 1.2;
         }
 
@@ -322,10 +355,6 @@
         .timeline-date { font-family: 'Courier Prime', monospace; font-size: 0.85rem; color: #D4AF37; margin-bottom: 4px; font-weight: bold; letter-spacing: 1px; }
         .timeline-title { font-family: 'Cinzel', serif; font-size: 1.05rem; color: var(--palette-navy); margin: 0; font-weight: 800; line-height: 1.3; }
         .timeline-place { font-family: 'Lora', serif; font-style: italic; color: #555; margin: 3px 0 0 0; font-size: 0.95rem; }
-        
-        /* Dark mode overrides for timeline */
-        body.dark-mode .timeline-dot { border-color: var(--card-bg); }
-        body.dark-mode .timeline-place { color: var(--text-sub); }
 
         .hobby-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
         .hobby-tag { background: #f0f4f8; color: var(--palette-navy); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; font-family: 'Inter', sans-serif; border: 1px solid #dae1e7; transition: all 0.2s; }
@@ -335,7 +364,6 @@
         .info-item { margin-bottom: 5px; }
         
         .featured-title { text-align: center; font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: var(--palette-navy); margin-bottom: 20px; transition: color 0.5s; }
-        body.dark-mode .featured-title { color: var(--gold-text); }
         
         .featured-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 40px; }
         .featured-item { border-radius: 12px; overflow: hidden; height: 250px; position: relative; box-shadow: 0 4px 10px var(--shadow-color); }
@@ -363,11 +391,19 @@
             .floating-actions { bottom: 20px; right: 20px; }
             .music-btn { bottom: 20px; left: 20px; width: 50px; height: 50px; }
         }
+        
+        /* Language Toggle Logic */
+        body.lang-vi .lang-en, body.lang-vi .lang-la { display: none !important; }
+        body.lang-en .lang-vi, body.lang-en .lang-la { display: none !important; }
+        body.lang-la .lang-vi, body.lang-la .lang-en { display: none !important; }
     </style>
 </head>
 <body class="lang-vi"> 
     
     <div id="welcome-overlay">
+        <div class="curtain-panel curtain-left"></div>
+        <div class="curtain-panel curtain-right"></div>
+
         <div class="welcome-content">
             <span class="welcome-logo">🎓</span>
             <div class="welcome-title">MinhKhoi's Graduation</div>
@@ -377,6 +413,11 @@
                 OPEN INVITATION
             </button>
         </div>
+    </div>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">×</span>
+        <img id="lightbox-img" src="" alt="Fullsize Image">
     </div>
 
     <div class="floating-actions">
@@ -393,8 +434,11 @@
 
     <audio id="bg-music" loop>
         <source src="Beethovens5Secrets.mp3.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
     </audio>
+    <audio id="sfx-applause">
+        <source src="applause.mp3" type="audio/mpeg">
+    </audio>
+
     <div class="music-btn" onclick="toggleMusic()">
         <i class="fa-solid fa-music music-icon" id="music-icon"></i>
     </div>
@@ -536,42 +580,49 @@
                         <h4 class="timeline-title">Foreign Affairs Officer</h4>
                         <p class="timeline-place">Conferentia Episcoporum Vietnamie</p>
                     </div>
+                    
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
                         <div class="timeline-date">2025 - Present</div>
                         <h4 class="timeline-title">Professor of Theology</h4>
                         <p class="timeline-place">Nha Trang Cathedral</p>
                     </div>
+
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
                         <div class="timeline-date">2025 </div>
                         <h4 class="timeline-title">Mentor</h4>
                         <p class="timeline-place">Le Quy Don Science and Engineering Fair</p>
                     </div>
+
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
                         <div class="timeline-date">2024 - 2025</div>
                         <h4 class="timeline-title">Vice Proffessor of Theology</h4>
                         <p class="timeline-place">Phuoc Hoa Patrish</p>
                     </div>
+
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
                         <div class="timeline-date">2023 - 2025</div>
                         <h4 class="timeline-title">Photographer of LMC</h4>
                         <p class="timeline-place">Le Quy Don Media Club</p>
                     </div>
+
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
                         <div class="timeline-date">2024</div>
                         <h4 class="timeline-title">Head of Collabrator (Tech & Control)</h4>
                         <p class="timeline-place">MSOCE Management</p>
                     </div>
+
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
                         <div class="timeline-date">2023 - 2024</div>
                         <h4 class="timeline-title">Member of Logistics Department</h4>
                         <p class="timeline-place">We Know We Share 2024</p>
                     </div>
+
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
                         <div class="timeline-date">2017 - 2022</div>
@@ -811,10 +862,10 @@
                 <img src="Pio.jpg" alt="Moment 1">
             </div>
             <div class="featured-item">
-                <img src="01.jpg" alt="Graduation Cap">
+                <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=600&auto=format&fit=crop" alt="Graduation Cap">
             </div>
             <div class="featured-item">
-                <img src="02.jpg" alt="School">
+                <img src="https://images.unsplash.com/photo-1604882737321-e6937ee9f8e8?q=80&w=600&auto=format&fit=crop" alt="School">
             </div>
         </div>
 
@@ -917,9 +968,11 @@
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
         // --- VARIABLES ---
         const bgMusic = document.getElementById("bg-music");
+        const applauseSfx = document.getElementById("sfx-applause");
         const musicIcon = document.getElementById("music-icon");
         const musicBtn = document.querySelector(".music-btn");
         const welcomeOverlay = document.getElementById("welcome-overlay");
@@ -927,24 +980,72 @@
 
         // --- WELCOME & START FUNCTION ---
         function startExperience() {
-            // 1. Play Music (Phải đặt trong chuỗi tương tác user)
+            // 1. Kích hoạt hiệu ứng mở màn (CSS Curtain)
+            welcomeOverlay.classList.add("open");
+
+            // 2. Play Music & Sound Effect
             bgMusic.play().then(() => {
                 musicBtn.classList.add("playing");
                 musicIcon.classList.remove("fa-music");
                 musicIcon.classList.add("fa-pause");
             }).catch(e => console.log("Music play error:", e));
+            
+            applauseSfx.play().catch(e => console.log("Applause error:", e));
 
-            // 2. Hide Overlay
-            welcomeOverlay.classList.add("hidden");
+            // 3. Hiệu ứng bắn pháo hoa (Confetti)
+            triggerConfetti();
 
-            // 3. Init Animations after overlay gone (để hiệu ứng chạy đẹp)
+            // 4. Init Animations after delay
             setTimeout(() => {
                 AOS.init();
-            }, 500);
+            }, 800);
         }
 
-        // --- DARK MODE LOGIC (NEW) ---
-        // Check saved theme on load
+        // --- CONFETTI EFFECT ---
+        function triggerConfetti() {
+            var duration = 3000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        // --- [NEW] LIGHTBOX LOGIC ---
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        document.querySelectorAll('.featured-item img').forEach(img => {
+            img.addEventListener('click', function() {
+                lightboxImg.src = this.src;
+                lightbox.classList.add('active');
+            });
+        });
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+        }
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") closeLightbox();
+        });
+
+        // --- DARK MODE LOGIC ---
         window.addEventListener('load', () => {
             const savedTheme = localStorage.getItem('minhkhoi_theme');
             if (savedTheme === 'dark') {
@@ -984,19 +1085,11 @@
             }
         }
 
-        // --- DỮ LIỆU GALLERY ---
+        // --- DỮ LIỆU GALLERY & LANGUAGE ---
         const photoFolders = [
-            {
-                name: "MinhKhoi_GraduationPhotoshoot",
-                downloadUrl: "https://drive.google.com/drive/folders/1rmopYHyyEkl6Eoy7zeeLVxyuGYYRqLhf?usp=sharing",
-            },
-            {
-                name: "Anna Uwu",
-                downloadUrl: "https://drive.google.com/drive/folders/1cNagl52lth6eh-rKwIU2KeH00qb_IQf5?usp=sharing",
-            }
+            { name: "MinhKhoi_GraduationPhotoshoot", downloadUrl: "https://drive.google.com/drive/folders/1rmopYHyyEkl6Eoy7zeeLVxyuGYYRqLhf?usp=sharing" },
+            { name: "Anna Uwu", downloadUrl: "https://drive.google.com/drive/folders/1cNagl52lth6eh-rKwIU2KeH00qb_IQf5?usp=sharing" }
         ];
-
-        // --- HÀM TOGGLE NGÔN NGỮ ---
         const langOrder = ['lang-vi', 'lang-en', 'lang-la'];
         
         function toggleLanguage() {
@@ -1018,7 +1111,6 @@
             filterGallery();
         }
 
-        // --- HÀM HIỂN THỊ GALLERY ---
         function renderGallery(filter = "") {
             const container = document.getElementById('gallery-container');
             container.innerHTML = `<div class="action-grid" id="action-grid"></div>`;
@@ -1046,7 +1138,7 @@
         document.getElementById('gallerySearch').addEventListener('keyup', function(e) { renderGallery(e.target.value); });
         function filterGallery() { renderGallery(document.getElementById('gallerySearch').value); }
 
-        // --- NAVIGATION LOGIC ---
+        // --- NAVIGATION ---
         function showTab(tabId, element) {
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
@@ -1065,7 +1157,7 @@
             setTimeout(() => { AOS.refresh(); }, 100);
         }
         
-        // --- FORM LOGIC ---
+        // --- FORM & STORAGE ---
         let rsvpData = [], guestbookData = [];
         window.addEventListener('load', () => {
             renderGallery();
@@ -1101,7 +1193,7 @@
             document.getElementById('guestbook-thank-you').style.display = 'block';
         });
 
-        // --- COUNTDOWN & CALENDAR ---
+        // --- COUNTDOWN & DOWNLOAD ---
         const eventDate = new Date("Feb 1, 2026 08:30:00").getTime();
         const countdownInterval = setInterval(function() {
             const now = new Date().getTime();
@@ -1146,4 +1238,3 @@
     </script>
 </body>
 </html>
-
