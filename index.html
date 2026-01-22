@@ -28,6 +28,46 @@
             --text-sub:  #231f20;
         }
 
+        /* --- [NEW] WELCOME SCREEN OVERLAY --- */
+        #welcome-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--bg-main);
+            z-index: 99999; /* Luôn nằm trên cùng */
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            transition: opacity 0.8s ease-out, visibility 0.8s;
+        }
+        
+        #welcome-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .welcome-content { text-align: center; padding: 20px; animation: fadeIn 1.5s ease; }
+        .welcome-logo { font-size: 80px; margin-bottom: 20px; display: block; animation: float 3s ease-in-out infinite; }
+        .welcome-title { 
+            font-family: 'Cinzel', serif; font-size: 2rem; color: var(--palette-navy);
+            margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase;
+        }
+        .welcome-subtitle {
+            font-family: 'Great Vibes', cursive; font-size: 1.8rem; color: var(--gold-text);
+            margin-bottom: 40px; display: block;
+        }
+
+        .enter-btn {
+            background: transparent; color: var(--palette-navy);
+            border: 2px solid var(--palette-navy); padding: 15px 40px;
+            font-family: 'Cinzel', serif; font-weight: bold; font-size: 1rem;
+            cursor: pointer; transition: all 0.3s; letter-spacing: 2px;
+            position: relative; overflow: hidden;
+            text-transform: uppercase;
+        }
+        .enter-btn:hover { background: var(--palette-navy); color: #fff; transform: scale(1.05); }
+        
+        /* Hiệu ứng nổi cho logo */
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
         /* --- LANGUAGE TOGGLE LOGIC --- */
         body.lang-vi .lang-en, body.lang-vi .lang-la { display: none !important; }
         body.lang-en .lang-vi, body.lang-en .lang-la { display: none !important; }
@@ -39,7 +79,7 @@
             width: 65px; height: 65px;
             background: var(--palette-navy); color: #D4AF37;
             border: 2px solid #D4AF37; border-radius: 50%;
-            cursor: pointer; z-index: 9999;
+            cursor: pointer; z-index: 9990; /* Thấp hơn welcome screen */
             box-shadow: 0 4px 15px rgba(15, 26, 48, 0.4);
             display: flex; align-items: center; justify-content: center;
             font-family: 'Cinzel', serif; font-weight: bold; font-size: 1.1rem;
@@ -52,7 +92,7 @@
             position: fixed; bottom: 30px; left: 30px;
             width: 60px; height: 60px;
             background: #fff; border: 2px solid #D4AF37;
-            border-radius: 50%; cursor: pointer; z-index: 9999;
+            border-radius: 50%; cursor: pointer; z-index: 9990; /* Thấp hơn welcome screen */
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             display: flex; align-items: center; justify-content: center;
             transition: all 0.5s;
@@ -254,17 +294,35 @@
             .lang-toggle-btn { width: 55px; height: 55px; font-size: 0.9rem; bottom: 20px; right: 20px; }
             .music-btn { width: 50px; height: 50px; bottom: 20px; left: 20px; }
             .info-grid { grid-template-columns: 1fr; }
+            
+            /* Điều chỉnh Welcome Screen cho mobile */
+            .welcome-logo { font-size: 60px; }
+            .welcome-title { font-size: 1.5rem; }
+            .welcome-subtitle { font-size: 1.3rem; }
         }
     </style>
 </head>
 <body class="lang-vi"> 
+    
+    <div id="welcome-overlay">
+        <div class="welcome-content">
+            <span class="welcome-logo">🎓</span>
+            <div class="welcome-title">MinhKhoi's Graduation</div>
+            <span class="welcome-subtitle">The 1000-day journey</span>
+            
+            <button class="enter-btn" onclick="startExperience()">
+                OPEN INVITATION
+            </button>
+        </div>
+    </div>
+
     <button class="lang-toggle-btn" onclick="toggleLanguage()">
         <span class="lang-vi">VN</span>
         <span class="lang-en">EN</span>
         <span class="lang-la">LA</span>
     </button>
 
-    <audio id="bg-music" loop autoplay>
+    <audio id="bg-music" loop>
         <source src="Beethovens5Secrets.mp3.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
@@ -376,7 +434,7 @@
                     </div>
                     <div class="info-item">
                         <p><strong>Sex:</strong> Male</p>
-                        <p><strong>Email:</strong> luuminhkhoiworking@gmail.com</p>
+                        <p><strong>Email:</strong> luuminhkhoiworking@...</p>
                         <p><strong>Position:</strong> Prof. of Vocal Music</p>
                     </div>
                 </div>
@@ -791,37 +849,31 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // --- INITIALIZE ANIMATIONS & MUSIC ---
-        AOS.init();
-
+        // --- VARIABLES ---
         const bgMusic = document.getElementById("bg-music");
         const musicIcon = document.getElementById("music-icon");
         const musicBtn = document.querySelector(".music-btn");
+        const welcomeOverlay = document.getElementById("welcome-overlay");
 
-        // Logic tự động phát thông minh
-        window.addEventListener('load', function() {
-            var playPromise = bgMusic.play();
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                    // Autoplay started!
-                    musicBtn.classList.add("playing");
-                    musicIcon.classList.remove("fa-music");
-                    musicIcon.classList.add("fa-pause");
-                }).catch(error => {
-                    // Autoplay was prevented -> Wait for first interaction
-                    console.log("Autoplay prevented, waiting for user interaction...");
-                    document.body.addEventListener('click', function() {
-                        if(bgMusic.paused) {
-                            bgMusic.play();
-                            musicBtn.classList.add("playing");
-                            musicIcon.classList.remove("fa-music");
-                            musicIcon.classList.add("fa-pause");
-                        }
-                    }, { once: true });
-                });
-            }
-        });
+        // --- WELCOME & START FUNCTION ---
+        function startExperience() {
+            // 1. Play Music (Phải đặt trong chuỗi tương tác user)
+            bgMusic.play().then(() => {
+                musicBtn.classList.add("playing");
+                musicIcon.classList.remove("fa-music");
+                musicIcon.classList.add("fa-pause");
+            }).catch(e => console.log("Music play error:", e));
 
+            // 2. Hide Overlay
+            welcomeOverlay.classList.add("hidden");
+
+            // 3. Init Animations after overlay gone (để hiệu ứng chạy đẹp)
+            setTimeout(() => {
+                AOS.init();
+            }, 500);
+        }
+
+        // --- MUSIC TOGGLE ---
         function toggleMusic() {
             if (bgMusic.paused) {
                 bgMusic.play();
@@ -904,7 +956,6 @@
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             element.classList.add('active');
-            // Refresh AOS when switching tabs to re-trigger animations
             setTimeout(() => { AOS.refresh(); }, 100);
             if(tabId === 'tab-gallery') renderGallery();
         }
@@ -999,6 +1050,3 @@
     </script>
 </body>
 </html>
-
-
-
