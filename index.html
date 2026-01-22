@@ -72,24 +72,26 @@
         body.dark-mode .theme-toggle-btn { background: var(--card-bg); color: var(--gold-text); border-color: var(--gold-text); }
         body.dark-mode .featured-title { color: var(--gold-text); }
 
-        /* --- [NEW] STAGE CURTAIN WELCOME SCREEN --- */
+        /* --- [UPDATED] RED CURTAIN WELCOME SCREEN --- */
         #welcome-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 99999; 
             display: flex; align-items: center; justify-content: center;
-            overflow: hidden; /* Important for curtains */
-            pointer-events: all;
+            overflow: hidden; pointer-events: all;
         }
         
-        /* Hai cánh màn nhung */
+        /* Hai cánh màn nhung ĐỎ (Red Velvet Gradient) */
         .curtain-panel {
-            position: absolute; top: 0; height: 100%; width: 51%; /* Overlap slightly */
-            background-color: var(--bg-main); /* Màu nền trùng với web */
+            position: absolute; top: 0; height: 100%; width: 51%;
+            /* Màu đỏ nhung với hiệu ứng nếp gấp 3D */
+            background: linear-gradient(90deg, #4a0404 0%, #850b0b 50%, #4a0404 100%);
             z-index: 1; 
             transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5); /* Bóng đổ cho chiều sâu */
         }
-        .curtain-left { left: 0; transform-origin: left; border-right: 2px solid var(--gold-text); }
-        .curtain-right { right: 0; transform-origin: right; border-left: 2px solid var(--gold-text); }
+        
+        .curtain-left { left: 0; transform-origin: left; border-right: 2px solid #FCD34D; } /* Viền vàng */
+        .curtain-right { right: 0; transform-origin: right; border-left: 2px solid #FCD34D; }
 
         /* Nội dung chào nằm trên màn nhung */
         .welcome-content { 
@@ -98,32 +100,47 @@
             transition: opacity 0.5s ease;
         }
 
-        /* Khi mở màn (Class added via JS) */
+        /* Chỉnh màu chữ cho nổi trên nền đỏ */
+        .welcome-logo { 
+            font-size: 80px; margin-bottom: 20px; display: block; 
+            animation: float 3s ease-in-out infinite; 
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.4));
+        }
+        .welcome-title { 
+            font-family: 'Cinzel', serif; font-size: 2.5rem; 
+            color: #FFFFFF; /* Luôn màu trắng */
+            margin-bottom: 10px; letter-spacing: 3px; text-transform: uppercase;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .welcome-subtitle {
+            font-family: 'Great Vibes', cursive; font-size: 2rem; 
+            color: #FCD34D; /* Luôn màu vàng kim */
+            margin-bottom: 40px; display: block;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .enter-btn {
+            background: rgba(0,0,0,0.3); /* Nền tối mờ */
+            color: #FFFFFF;
+            border: 2px solid #FCD34D; padding: 15px 50px;
+            font-family: 'Cinzel', serif; font-weight: bold; font-size: 1.1rem;
+            cursor: pointer; transition: all 0.3s; letter-spacing: 3px;
+            position: relative; overflow: hidden; text-transform: uppercase;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .enter-btn:hover { 
+            background: #FCD34D; 
+            color: #4a0404; /* Chữ đỏ khi hover */
+            transform: scale(1.05); 
+            box-shadow: 0 0 20px #FCD34D;
+        }
+
+        /* Khi mở màn */
         #welcome-overlay.open .curtain-left { transform: translateX(-100%); }
         #welcome-overlay.open .curtain-right { transform: translateX(100%); }
         #welcome-overlay.open .welcome-content { opacity: 0; pointer-events: none; }
         #welcome-overlay.open { pointer-events: none; }
-
-        /* Các thành phần Welcome cũ */
-        .welcome-logo { font-size: 80px; margin-bottom: 20px; display: block; animation: float 3s ease-in-out infinite; }
-        .welcome-title { 
-            font-family: 'Cinzel', serif; font-size: 2rem; color: var(--text-main);
-            margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase;
-        }
-        .welcome-subtitle {
-            font-family: 'Great Vibes', cursive; font-size: 1.8rem; color: var(--gold-text);
-            margin-bottom: 40px; display: block;
-        }
-
-        .enter-btn {
-            background: transparent; color: var(--text-main);
-            border: 2px solid var(--gold-text); padding: 15px 40px;
-            font-family: 'Cinzel', serif; font-weight: bold; font-size: 1rem;
-            cursor: pointer; transition: all 0.3s; letter-spacing: 2px;
-            position: relative; overflow: hidden; text-transform: uppercase;
-            border-radius: 30px;
-        }
-        .enter-btn:hover { background: var(--gold-text); color: var(--bg-main); transform: scale(1.05); }
         
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
@@ -433,7 +450,7 @@
     </div>
 
     <audio id="bg-music" loop>
-        <source src="Beethovens5Secrets.mp3.mp3" type="audio/mpeg">
+        <source src="Beethovens5Secrets.mp3" type="audio/mpeg">
     </audio>
     <audio id="sfx-applause">
         <source src="applause.mp3" type="audio/mpeg">
@@ -990,7 +1007,10 @@
                 musicIcon.classList.add("fa-pause");
             }).catch(e => console.log("Music play error:", e));
             
-            applauseSfx.play().catch(e => console.log("Applause error:", e));
+            // Thử phát tiếng vỗ tay nếu có file
+            if(applauseSfx) {
+                applauseSfx.play().catch(e => console.log("Applause error:", e));
+            }
 
             // 3. Hiệu ứng bắn pháo hoa (Confetti)
             triggerConfetti();
@@ -1026,7 +1046,7 @@
             }());
         }
 
-        // --- [NEW] LIGHTBOX LOGIC ---
+        // --- LIGHTBOX LOGIC ---
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
 
