@@ -72,41 +72,40 @@
         body.dark-mode .theme-toggle-btn { background: var(--card-bg); color: var(--gold-text); border-color: var(--gold-text); }
         body.dark-mode .featured-title { color: var(--gold-text); }
 
-        /* --- [REFINED] RED CURTAIN WELCOME SCREEN --- */
+        /* --- [FIXED] RED CURTAIN WELCOME SCREEN --- */
         #welcome-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 99999; 
             display: flex; align-items: center; justify-content: center;
             overflow: hidden; pointer-events: all;
-            background: #2a0202; /* Màu nền lót để tránh hở sáng */
+            /* QUAN TRỌNG: Nền trong suốt để khi rèm mở thì thấy web bên dưới */
+            background: transparent; 
         }
         
-        /* Hai cánh màn nhung ĐỎ (Cân chỉnh Perfect Center) */
+        /* Hai cánh màn nhung ĐỎ */
         .curtain-panel {
-            position: absolute; top: 0; height: 100%; width: 50%; /* Chính xác 50% */
+            position: absolute; top: 0; height: 100%; width: 50%;
             z-index: 1; 
-            transition: transform 1.8s cubic-bezier(0.77, 0, 0.175, 1);
-            box-sizing: border-box; /* Quan trọng: Tính viền vào trong độ rộng */
-            box-shadow: 0 0 50px rgba(0,0,0,0.8); /* Bóng đổ mạnh hơn */
+            transition: transform 2s cubic-bezier(0.77, 0, 0.175, 1);
+            box-sizing: border-box;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
         }
         
         .curtain-left { 
             left: 0; 
             transform-origin: left; 
-            border-right: 3px solid #FCD34D; /* Viền vàng */
-            /* Gradient đỏ đậm dần về phía mép ngoài */
+            border-right: 3px solid #FCD34D;
             background: linear-gradient(90deg, #2a0202 0%, #850b0b 40%, #b91c1c 95%, #850b0b 100%);
         } 
         
         .curtain-right { 
             right: 0; 
             transform-origin: right; 
-            border-left: 3px solid #FCD34D; /* Viền vàng */
-            /* Gradient đỏ đậm dần về phía mép ngoài (Ngược chiều) */
+            border-left: 3px solid #FCD34D;
             background: linear-gradient(-90deg, #2a0202 0%, #850b0b 40%, #b91c1c 95%, #850b0b 100%);
         }
 
-        /* Nội dung chào nằm trên màn nhung */
+        /* Nội dung chào */
         .welcome-content { 
             position: relative; z-index: 10; 
             text-align: center; padding: 20px; 
@@ -114,7 +113,6 @@
             width: 100%;
         }
 
-        /* Chỉnh màu chữ cho nổi trên nền đỏ */
         .welcome-logo { 
             font-size: 80px; margin-bottom: 20px; display: block; 
             animation: float 3s ease-in-out infinite; 
@@ -122,13 +120,13 @@
         }
         .welcome-title { 
             font-family: 'Cinzel', serif; font-size: 2.5rem; 
-            color: #FFFFFF; /* Luôn màu trắng */
+            color: #FFFFFF;
             margin-bottom: 10px; letter-spacing: 3px; text-transform: uppercase;
             text-shadow: 0 4px 20px rgba(0,0,0,0.8);
         }
         .welcome-subtitle {
             font-family: 'Great Vibes', cursive; font-size: 2rem; 
-            color: #FCD34D; /* Luôn màu vàng kim */
+            color: #FCD34D;
             margin-bottom: 40px; display: block;
             text-shadow: 0 2px 10px rgba(0,0,0,0.8);
         }
@@ -1029,10 +1027,12 @@
             // 3. Hiệu ứng bắn pháo hoa (Confetti)
             triggerConfetti();
 
-            // 4. Init Animations after delay
+            // 4. Init Animations after delay & Hide Overlay completely
             setTimeout(() => {
                 AOS.init();
-            }, 800);
+                // Ẩn hoàn toàn overlay sau 2s để không che web
+                welcomeOverlay.style.display = 'none';
+            }, 2000);
         }
 
         // --- CONFETTI EFFECT ---
