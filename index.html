@@ -17,7 +17,8 @@
     <meta property="twitter:title" content="Lời mời từ Minh Khôi | Graduation Ceremony 🎓">
     <meta property="twitter:description" content="The tassel was worth the hassle. Cùng chia sẻ khoảnh khắc đặc biệt này với mình nhé!">
     <meta property="twitter:image" content="https://minhkhoifotography.github.io/minhkhoi_commencement_ceremony/Pio.jpg">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+    
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=Lora:wght@500;600&family=EB+Garamond:ital,wght@1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Courier+Prime&family=Great+Vibes&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
@@ -36,27 +37,10 @@
 
         /* --- DARK MODE VARIABLES --- */
         body.dark-mode {
-            --bg-main: #0F172A; --card-bg: rgba(30, 41, 59, 0.8); /* Glassmorphism base */
+            --bg-main: #0F172A; --card-bg: rgba(30, 41, 59, 0.85); /* Tăng độ đậm nền card */
             --text-main: #E2E8F0; --text-sub:  #CBD5E1;
             --palette-navy: #D4AF37; --gold-text: #FCD34D;
-            --border-color: #334155; --shadow-color: rgba(0,0,0,0.3);
-        }
-
-        /* --- [NEW] CUSTOM CURSOR --- */
-        .cursor-dot, .cursor-outline {
-            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
-            border-radius: 50%; z-index: 999999; pointer-events: none;
-        }
-        .cursor-dot { width: 8px; height: 8px; background-color: var(--gold-text); }
-        .cursor-outline {
-            width: 40px; height: 40px; border: 1px solid var(--gold-text);
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
-        }
-        /* Hide cursor on mobile */
-        @media (max-width: 768px) { .cursor-dot, .cursor-outline { display: none; } }
-        /* Interactive State */
-        body.hovering .cursor-outline {
-            width: 60px; height: 60px; background-color: rgba(212, 175, 55, 0.1); border-color: transparent;
+            --border-color: #334155; --shadow-color: rgba(0,0,0,0.4);
         }
 
         /* --- [NEW] PRELOADER --- */
@@ -73,37 +57,48 @@
         }
         .loader-text { font-family: 'Courier Prime', monospace; color: #D4AF37; letter-spacing: 2px; font-size: 0.9rem; }
 
-        /* --- [NEW] TOAST NOTIFICATION --- */
-        #toast-box {
-            position: fixed; top: 20px; right: 20px; z-index: 100000;
-            display: flex; flex-direction: column; gap: 10px;
+        /* --- [NEW] CUSTOM CURSOR --- */
+        .cursor-dot, .cursor-outline {
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            border-radius: 50%; z-index: 999999; pointer-events: none;
         }
+        .cursor-dot { width: 8px; height: 8px; background-color: var(--gold-text); }
+        .cursor-outline {
+            width: 40px; height: 40px; border: 1px solid var(--gold-text);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+        @media (max-width: 768px) { .cursor-dot, .cursor-outline { display: none; } }
+        body.hovering .cursor-outline {
+            width: 60px; height: 60px; background-color: rgba(212, 175, 55, 0.1); border-color: transparent;
+        }
+
+        /* --- [NEW] TOAST NOTIFICATION --- */
+        #toast-box { position: fixed; top: 20px; right: 20px; z-index: 100000; display: flex; flex-direction: column; gap: 10px; }
         .toast {
             background: var(--palette-navy); color: #fff; padding: 15px 25px;
             border-radius: 8px; border-left: 4px solid var(--gold-text);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 10px;
             font-family: 'Inter', sans-serif; font-size: 0.9rem;
             transform: translateX(120%); transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
         .toast.show { transform: translateX(0); }
         .toast i { color: var(--gold-text); font-size: 1.2rem; }
 
-        /* Custom Scrollbar */
+        /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-main); }
         ::-webkit-scrollbar-thumb { background: var(--gold-text); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--palette-navy); }
 
-        /* Standard Styles Adjustments */
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-main); margin: 0; padding: 20px; line-height: 1.6; overflow-x: hidden; transition: background-color 0.5s, color 0.5s; cursor: none; /* Hide default cursor */ }
+        /* Global */
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-main); margin: 0; padding: 20px; line-height: 1.6; overflow-x: hidden; transition: background-color 0.5s, color 0.5s; cursor: none; }
         
-        /* Dark Mode Glassmorphism */
+        /* Dark Mode Adjustments */
         body.dark-mode .invitation-card, body.dark-mode .about-card, body.dark-mode .form-card {
             background: var(--card-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* --- BUTTONS & NAV --- */
+        /* Buttons & Nav */
         .floating-actions { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 15px; z-index: 9990; }
         .lang-toggle-btn, .theme-toggle-btn, .back-to-top {
             width: 55px; height: 55px; background: var(--palette-navy); color: #D4AF37;
@@ -114,9 +109,11 @@
         .lang-toggle-btn:hover, .theme-toggle-btn:hover, .back-to-top:hover { transform: scale(1.1); }
         .back-to-top { opacity: 0; visibility: hidden; transition: all 0.3s; }
         .back-to-top.show { opacity: 1; visibility: visible; }
+        
         .music-btn { position: fixed; bottom: 30px; left: 30px; width: 55px; height: 55px; background: #fff; border: 2px solid #D4AF37; border-radius: 50%; cursor: none; z-index: 9990; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; transition: all 0.5s; }
         .music-icon { font-size: 20px; color: var(--palette-navy); }
         .music-btn.playing { animation: spin 4s linear infinite; border-color: var(--palette-navy); }
+        
         .copy-btn { background: var(--palette-navy); color: white; border: 1px solid var(--gold-text); padding: 8px 15px; border-radius: 20px; cursor: none; font-size: 0.8rem; margin-top: 5px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 5px; }
         .copy-btn:hover { background: var(--gold-text); color: var(--palette-navy); transform: translateY(-2px); }
 
@@ -194,30 +191,63 @@
         .typewriter-text { border-right: 2px solid var(--gold-text); white-space: nowrap; overflow: hidden; display: inline-block; animation: blink-caret 0.75s step-end infinite; }
         @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--gold-text); } }
         
-        /* Standard card styles for structure */
+        /* CARD STYLES UPDATED */
         .content-section { max-width: 1000px; margin: 0 auto; display: none; }
         .content-section.active { display: block; }
-        .about-card, .invitation-card, .form-card { background: var(--card-bg); max-width: 500px; margin: 20px auto; padding: 35px; border-radius: 16px; box-shadow: 0 4px 15px var(--shadow-color); transition: background 0.5s; }
+        
+        .about-card, .form-card { background: var(--card-bg); max-width: 500px; margin: 20px auto; padding: 35px; border-radius: 16px; box-shadow: 0 4px 15px var(--shadow-color); transition: background 0.5s; }
         .about-card { max-width: 1000px; display: flex; gap: 30px; align-items: flex-start; }
-        .about-image img { width: 300px; border-radius: 15px; box-shadow: 10px 10px 0px var(--gold-text); }
-        .about-info h2 { font-family: 'Cinzel', serif; color: var(--palette-navy); margin-bottom: 20px; }
-        .curved-text-container { width: 100%; height: 100px; margin-bottom: -20px; }
+        
+        /* --- [FIX] INVITATION CARD ADJUSTMENTS --- */
+        .invitation-card {
+            background: var(--card-bg);
+            max-width: 650px; /* Tăng chiều rộng lên để thoáng hơn */
+            margin: 0 auto 30px auto;
+            padding: 40px 30px;
+            text-align: center;
+            border-radius: 2px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            position: relative;
+            color: #333;
+            transition: background 0.5s, color 0.5s;
+        }
+        
+        /* [FIX] Centering SVG Container */
+        .curved-text-container { 
+            width: 100%; height: 100px; margin-bottom: -20px; 
+            display: flex; justify-content: center; /* Căn giữa SVG */
+        }
+        
         .grad-cap-icon { width: 120px; margin: 0 auto; display: block; }
         .intro-text { font-family: 'Courier Prime', monospace; font-size: 1rem; color: #444; margin-top: 20px; }
         .script-name { font-family: 'Great Vibes', cursive; font-size: 4rem; color: var(--gold-text); margin: 0; line-height: 1.2; font-weight: 400; }
         .main-event-title, .sub-event-title { font-family: 'Courier Prime', monospace; text-transform: uppercase; color: #333; font-weight: 600; }
         .main-event-title { font-size: 1.4rem; margin-top: 5px; letter-spacing: 4px; }
         .sub-event-title { font-size: 1.4rem; margin-bottom: 20px; letter-spacing: 6px; }
-        .details-container { border-top: 1px solid #555; border-bottom: 1px solid #555; padding: 15px 0; margin: 25px 0; display: flex; align-items: center; justify-content: center; }
+        
+        /* [FIX] Details Container Spacing */
+        .details-container { 
+            border-top: 1px solid #555; border-bottom: 1px solid #555; 
+            padding: 20px 0; margin: 25px 0; 
+            display: flex; align-items: center; justify-content: space-between; /* Giãn đều các cột */
+        }
         .detail-col { padding: 0 15px; text-align: center; }
-        .detail-col.center { border-left: 1px solid #555; border-right: 1px solid #555; flex: 1; }
+        .detail-col.center { 
+            border-left: 1px solid #555; border-right: 1px solid #555; 
+            flex: 2; /* Cột giữa chiếm nhiều không gian hơn */
+            padding: 0 20px;
+        }
+        
         .gold-label { color: var(--gold-text); font-weight: bold; font-size: 1.4rem; font-family: 'Courier Prime', monospace; display: block; line-height: 1; }
         .gold-number { color: var(--gold-text); font-weight: bold; font-size: 1.8rem; font-family: 'Courier Prime', monospace; display: block; margin-top: 5px; }
-        .location-text { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: #333; line-height: 1.4; }
+        .location-text { font-family: 'Playfair Display', serif; font-size: 1rem; color: #333; line-height: 1.5; }
         .dresscode-text, .rsvp-text { font-family: 'Courier Prime', monospace; font-size: 1rem; color: #333; }
         .dresscode-text { margin-bottom: 15px; } .rsvp-text { font-weight: 600; font-size: 1.1rem; }
         .palette-row { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
         .color-dot { width: 35px; height: 35px; border-radius: 50%; display: inline-block; }
+        
+        /* Remaining Styles */
         .map-container { max-width: 500px; margin: 0 auto 30px auto; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px var(--shadow-color); border: 1px solid var(--border-color); }
         .map-container iframe { width: 100%; height: 300px; border: none; display: block; }
         .form-group { margin-bottom: 20px; text-align: left; }
@@ -262,20 +292,29 @@
         body.lang-en .lang-vi, body.lang-en .lang-la { display: none !important; }
         body.lang-la .lang-vi, body.lang-la .lang-en { display: none !important; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media screen and (max-width: 768px) {
+            .taskbar { flex-direction: column; gap: 15px; padding: 15px; }
+            .nav-links { flex-wrap: nowrap; overflow-x: auto; width: 100%; justify-content: flex-start; padding-bottom: 5px; }
+            .nav-item { font-size: 0.85rem; padding: 8px 12px; white-space: nowrap; flex-shrink: 0; }
+            .about-card { flex-direction: column; padding: 20px; align-items: center; }
+            .about-image img { width: 100%; max-width: 250px; margin-bottom: 20px; }
+            .title-group h1 { font-size: 1.5rem !important; }
+            .main-idea { font-size: 0.95rem !important; }
+            .details-container { flex-direction: column; gap: 20px; }
+            .detail-col.center { border: none; border-top: 1px solid #555; border-bottom: 1px solid #555; padding: 15px 0; width: 100%; }
+            .info-grid { grid-template-columns: 1fr; }
+            .welcome-logo { font-size: 60px; }
+            .welcome-title { font-size: 1.5rem; }
+            .welcome-subtitle { font-size: 1.3rem; }
+            .floating-actions { bottom: 20px; right: 20px; }
+            .music-btn { bottom: 20px; left: 20px; width: 50px; height: 50px; }
+        }
     </style>
 </head>
 <body class="lang-vi"> 
     
-    <div id="preloader">
-        <div class="loader-spinner"></div>
-        <div class="loader-text">LOADING MEMORIES...</div>
-    </div>
-
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-
-    <div id="toast-box"></div>
-
     <div id="welcome-overlay">
         <div class="curtain-panel curtain-left"></div>
         <div class="curtain-panel curtain-right"></div>
@@ -286,6 +325,15 @@
             <button class="enter-btn" onclick="startExperience()">OPEN INVITATION</button>
         </div>
     </div>
+
+    <div id="preloader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">LOADING MEMORIES...</div>
+    </div>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    <div id="toast-box"></div>
 
     <div id="lightbox" onclick="closeLightbox()">
         <span class="lightbox-close">×</span>
@@ -377,13 +425,13 @@
     </nav>
 
     <div class="content-section active" id="tab-intro">
-        <div style="background: var(--card-bg); border-left: 4px solid var(--palette-navy); padding: 35px 40px; border-radius: 0 20px 20px 0; box-shadow: 0 4px 15px var(--shadow-color);" data-aos="fade-right" data-aos-duration="1000">
+        <div style="background: var(--card-bg); border-left: 4px solid var(--palette-navy); padding: 35px 40px; border-radius: 0 20px 20px 0; box-shadow: 0 4px 15px rgba(30,44,72,0.05);" data-aos="fade-right" data-aos-duration="1000">
             <h2 style="color:var(--palette-navy); margin-top:0; font-family: 'Playfair Display', serif; font-style: italic;">
                 <span class="lang-vi">Tri ân những mảnh ghép thanh xuân...</span>
                 <span class="lang-en">Gratitude to the pieces of my youth...</span>
                 <span class="lang-la">Gratitudo ad fragmenta juventutis meae...</span>
             </h2>
-            <p style="font-size: 1.1rem; color: var(--text-main); text-align: justify;">
+            <p style="font-size: 1.1rem; color: #334155; text-align: justify;">
                 <span class="lang-vi">
                     "Thanh xuân của Minh Khôi không chỉ là những trang vở tại Đôn, mà còn là một bức tranh rực rỡ được dệt nên từ sự hiện diện của tất cả mọi người. <br><br>
                     Cho phép Lưu Minh Khôi muốn gửi lời <strong>biết ơn và tri ân sâu sắc nhất</strong> đến gia đình, thầy cô và những người bạn đã từng xuất hiện, từng đồng hành, hoặc dù chỉ lướt qua trong hành trình 1000 ngày vừa qua. Mỗi nụ cười, mỗi lời động viên và cả những thử thách mà chúng ta cùng đi qua đã nhào nặn nên phiên bản Minh Khôi của ngày hôm nay. <br><br>
@@ -797,7 +845,7 @@
             setTimeout(() => {
                 preloader.style.opacity = '0';
                 setTimeout(() => { preloader.style.display = 'none'; }, 500);
-            }, 1000); // 1s fake load time
+            }, 1000); 
         };
 
         // --- CUSTOM CURSOR LOGIC ---
@@ -807,16 +855,11 @@
         window.addEventListener("mousemove", function (e) {
             const posX = e.clientX;
             const posY = e.clientY;
-            
-            // Dot follows instantly
             cursorDot.style.left = `${posX}px`;
             cursorDot.style.top = `${posY}px`;
-            
-            // Outline follows with slight delay (animation in CSS)
             cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
         });
 
-        // Add hover effect to interactive elements
         const interactiveElements = document.querySelectorAll('a, button, .featured-item, .invitation-card, input, textarea, .nav-item');
         interactiveElements.forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
@@ -826,8 +869,6 @@
         // --- WELCOME & START FUNCTION ---
         function startExperience() {
             welcomeOverlay.classList.add("open");
-            
-            // Set Volume Levels (30% Music, 50% Applause)
             bgMusic.volume = 0.3;
             if(applauseSfx) applauseSfx.volume = 0.5;
 
@@ -840,9 +881,7 @@
             if(applauseSfx) {
                 applauseSfx.play().catch(e => console.log("Applause error:", e));
             }
-            
             triggerConfetti();
-            
             setTimeout(() => {
                 AOS.init();
                 welcomeOverlay.style.display = 'none';
@@ -998,7 +1037,7 @@
         document.getElementById('gallerySearch').addEventListener('keyup', function(e) { renderGallery(e.target.value); });
         function filterGallery() { renderGallery(document.getElementById('gallerySearch').value); }
 
-        // --- NAVIGATION (FIXED) ---
+        // --- NAVIGATION ---
         function showTab(tabId, element) {
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
@@ -1053,7 +1092,7 @@
             document.getElementById('guestbook-thank-you').style.display = 'block';
         });
 
-        // --- COUNTDOWN ---
+        // --- COUNTDOWN & DOWNLOAD ---
         const eventDate = new Date("Feb 1, 2026 08:30:00").getTime();
         const countdownInterval = setInterval(function() {
             const now = new Date().getTime();
@@ -1123,6 +1162,12 @@
         document.querySelectorAll('img').forEach(img => {
             img.setAttribute('loading', 'lazy'); img.setAttribute('decoding', 'async'); 
         });
+        if ('addEventListener' in document) {
+            document.addEventListener('DOMContentLoaded', function() {
+                const navItems = document.querySelectorAll('.nav-item');
+                navItems.forEach(item => { item.style.touchAction = 'manipulation'; });
+            }, false);
+        }
     </script>
 </body>
 </html>
