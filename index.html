@@ -1223,7 +1223,7 @@
             setTimeout(() => { AOS.refresh(); }, 500);
         }
         
-        // --- FORM & STORAGE ---
+        // --- FORM & STORAGE (ĐÃ SỬA ĐỔI ĐỂ KHÔNG CHUYỂN TRANG) ---
         let rsvpData = [], guestbookData = [];
         window.addEventListener('load', () => {
             renderGallery();
@@ -1233,30 +1233,85 @@
             if (savedGB) JSON.parse(savedGB).forEach(item => guestbookData.push(item));
         });
 
+        // 1. XỬ LÝ RSVP FORM
         document.getElementById('rsvp-form').addEventListener('submit', function(e) {
-            const selectedTimes = Array.from(document.querySelectorAll('input[name="time"]:checked')).map(cb => cb.value).join("; ");
-            const newData = {
-                Name: document.querySelector('input[name="name"]').value,
-                Phone: document.querySelector('input[name="phone"]').value,
-                Times: selectedTimes || document.querySelector('input[name="time"]').value,
-                Note: document.querySelector('textarea[name="note"]').value
-            };
-            rsvpData.push(newData);
-            localStorage.setItem('minhkhoi_rsvp_storage', JSON.stringify(rsvpData));
-            document.getElementById('rsvp-form-container').style.display = 'none';
-            document.getElementById('rsvp-thank-you').style.display = 'block';
+            e.preventDefault(); // Chặn hành động chuyển trang mặc định
+
+            var form = this;
+            var formData = new FormData(form);
+
+            // Gửi dữ liệu sang Formspree bằng Fetch API
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // --- NẾU GỬI THÀNH CÔNG THÌ MỚI CHẠY CODE CŨ CỦA BẠN ---
+                    const selectedTimes = Array.from(document.querySelectorAll('input[name="time"]:checked')).map(cb => cb.value).join("; ");
+                    const newData = {
+                        Name: document.querySelector('input[name="name"]').value,
+                        Phone: document.querySelector('input[name="phone"]').value,
+                        Times: selectedTimes || document.querySelector('input[name="time"]').value,
+                        Note: document.querySelector('textarea[name="note"]').value
+                    };
+                    rsvpData.push(newData);
+                    localStorage.setItem('minhkhoi_rsvp_storage', JSON.stringify(rsvpData));
+                    
+                    // Ẩn form và hiện lời cảm ơn
+                    document.getElementById('rsvp-form-container').style.display = 'none';
+                    document.getElementById('rsvp-thank-you').style.display = 'block';
+                    form.reset(); 
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            alert(data["errors"].map(error => error["message"]).join(", "));
+                        } else {
+                            alert("Oops! Có lỗi xảy ra khi gửi form.");
+                        }
+                    });
+                }
+            }).catch(error => {
+                alert("Lỗi kết nối mạng! Vui lòng thử lại.");
+            });
         });
 
+        // 2. XỬ LÝ GUESTBOOK FORM
         document.getElementById('gb-form').addEventListener('submit', function(e) {
-            const newData = {
-                Name: document.querySelector('input[name="guest_name"]').value,
-                Contact: document.querySelector('input[name="contact"]').value,
-                Message: document.querySelector('textarea[name="message"]').value.replace(/\n/g, " ") 
-            };
-            guestbookData.push(newData);
-            localStorage.setItem('minhkhoi_gb_storage', JSON.stringify(guestbookData));
-            document.getElementById('guestbook-form-container').style.display = 'none';
-            document.getElementById('guestbook-thank-you').style.display = 'block';
+            e.preventDefault(); // Chặn hành động chuyển trang mặc định
+
+            var form = this;
+            var formData = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                     // --- NẾU GỬI THÀNH CÔNG THÌ MỚI CHẠY CODE CŨ CỦA BẠN ---
+                    const newData = {
+                        Name: document.querySelector('input[name="guest_name"]').value,
+                        Contact: document.querySelector('input[name="contact"]').value,
+                        Message: document.querySelector('textarea[name="message"]').value.replace(/\n/g, " ") 
+                    };
+                    guestbookData.push(newData);
+                    localStorage.setItem('minhkhoi_gb_storage', JSON.stringify(guestbookData));
+                    
+                    // Ẩn form và hiện lời cảm ơn
+                    document.getElementById('guestbook-form-container').style.display = 'none';
+                    document.getElementById('guestbook-thank-you').style.display = 'block';
+                    form.reset();
+                } else {
+                    alert("Oops! Có lỗi xảy ra khi gửi lời nhắn.");
+                }
+            }).catch(error => {
+                alert("Lỗi kết nối mạng! Vui lòng thử lại.");
+            });
         });
 
         // --- COUNTDOWN ---
@@ -1329,6 +1384,7 @@
     </script>
 </body>
 </html>
+
 
 
 
